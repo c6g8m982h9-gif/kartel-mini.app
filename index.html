@@ -994,6 +994,22 @@
   #bankPanel select.bk-cursel{ appearance:none; -webkit-appearance:none; border:none; padding:5px 10px; font-family:inherit; }
   #bankPanel .bk-chk{ align-self:start; margin-top:2px; }
   #bankPanel .scan-prev{ max-height:260px; overflow:hidden; }
+
+  /* ---- stable numbers + account chips ---- */
+  .dash-balance,.fin-balance-num,.fin-io-val,.stat-card .num,#widgetFinanceBig,.widget-big,.mono{ font-variant-numeric:tabular-nums; }
+  .dash-balance,.fin-balance-num,#widgetFinanceBig{ white-space:nowrap; overflow:hidden; text-overflow:clip; }
+  .dash-balance,.fin-balance-num{ min-height:1.15em; }
+  .widget-card{ contain:layout; }
+  .fin-balance-change,#dashMonthSub{ min-height:1.3em; }
+  .acc-chips{ display:flex; gap:8px; overflow-x:auto; padding:2px 0 6px; margin:0 -2px; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; }
+  .acc-chips::-webkit-scrollbar{ display:none; }
+  .acc-chip{ flex:none; scroll-snap-align:start; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-width:104px; padding:10px 14px; border-radius:16px; border:1px solid var(--hair,var(--line)); background:var(--card2); color:var(--ink); font-family:inherit; text-align:left; transition:transform .12s, background .2s, border-color .2s; }
+  .acc-chip:active{ transform:scale(.96); }
+  .acc-chip .n{ font-size:12px; color:var(--muted); font-weight:600; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .acc-chip .b{ font-size:15px; font-weight:800; font-family:var(--f-num,inherit); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .acc-chip.on{ background:linear-gradient(150deg,var(--red-bright),var(--red-deep)); border-color:transparent; color:var(--on-acc,#fff); box-shadow:0 8px 22px -10px var(--red-bright); }
+  body:not(.theme-classic) .balance-card .sec-label{ color:color-mix(in srgb,var(--on-acc,#fff) 82%,transparent) !important; }
+  .acc-chip.on .n{ color:color-mix(in srgb,var(--on-acc,#fff) 78%,transparent); }
   .qa-sheet-handle{ width:36px; height:4px; border-radius:3px; background:var(--line); margin:6px auto 16px; }
   .qa-sheet button{
     display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:none;
@@ -2319,7 +2335,8 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       </div>
 
       <div class="money-toolbar">
-        <div class="toolbar-row"><select class="account-select" id="accountFilter"></select></div>
+        <div class="acc-chips" id="accChips"></div>
+        <select class="account-select" id="accountFilter" hidden></select>
         <div class="toolbar-row">
           <div class="period-nav">
             <button type="button" id="periodPrev">‹</button>
@@ -2348,7 +2365,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
 
         <div class="fin-balance-card">
           <div class="fin-balance-top">
-            <span class="lbl">Общий баланс</span>
+            <span class="lbl" id="finBalLbl">Общий баланс</span>
             <button class="eye-btn" id="finEyeBtn">👁</button>
             <button class="fin-chart-btn" data-finqa="analytics">📈</button>
           </div>
@@ -3601,6 +3618,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     _rDash.apply(this,arguments);
     const n = document.getElementById('mcName'); if(n) n.textContent = (profileName||'KARTEL').toUpperCase();
     requestAnimationFrame(tweenNums);
+    try{ fitNum(document.getElementById('widgetFinanceBig'), document.getElementById('widgetFinanceBig').dataset.twFinal||document.getElementById('widgetFinanceBig').textContent); }catch(e){}
   };
   const _rHab = renderHabits; renderHabits = function(){ _rHab.apply(this,arguments); requestAnimationFrame(()=>{ tweenNums(); scrollGrids(); }); };
   function scrollGrids(){ document.querySelectorAll('.hg-grid-wrap,.hg-grid-wrap .progress-wrap').forEach(w=>{ w.scrollLeft = w.scrollWidth; }); }
@@ -5419,12 +5437,14 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     const BANK_FEE_NAMES=['Kosten','Commissie','Prowizja','Oplata','Fee','Commission','Provision','Gebuhr','Комис'];
     const BANK_FEE=BANK_FEE_NAMES.map(mf);
     function brandMatch(raw){
-      const nf=mf(raw); if(nf.length<2) return null; let best=null, bs=-1;
+      const nf=mf(raw); if(nf.length<2) return null; let best=null, bs=-1e9;
       for(const b of BRAND_LIST){
-        const n=b.f.length; let ok=false;
-        if(n<=3) ok = nf===b.f || (nf.startsWith(b.f) && nf.length<=n+2);
-        else { if(nf.includes(b.f)) ok=true; else { const tol=n>=9?2:(n>=6?1:0); if(tol&&nf.length>=n-tol) for(const len of [n-1,n,n+1]){ for(let i=0;i+len<=nf.length && !ok;i++){ if(lev(nf.substr(i,len),b.f)<=tol) ok=true; } if(ok) break; } } }
-        if(ok && n>bs){ best=b; bs=n; }
+        const n=b.f.length; let dist=-1;
+        if(n<=3){ if(nf===b.f || (nf.startsWith(b.f) && nf.length<=n+2)) dist=0; }
+        else if(nf.includes(b.f)) dist=0;
+        else { const tol=n>=9?2:(n>=4?1:0); if(tol&&nf.length>=n-tol){ let md=99; for(const len of [n-1,n,n+1]){ for(let i=0;i+len<=nf.length;i++){ const d=lev(nf.substr(i,len),b.f); if(d<md) md=d; } } if(md<=tol) dist=md; } }
+        if(dist<0) continue;
+        const sc=n*10-dist*25; if(sc>bs){ best=b; bs=sc; }
       }
       return best;
     }
@@ -6049,6 +6069,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     });
     if(activeAccountFilter!=='all') document.getElementById('txAccount').value = activeAccountFilter;
     if(accounts.length>1) document.getElementById('trTo').value = accounts[1].id;
+    try{ renderAccChips(); }catch(e){}
   }
   document.getElementById('accountFilter').addEventListener('change', e=>{
     activeAccountFilter = e.target.value;
@@ -6069,6 +6090,22 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   document.getElementById('periodPrev').addEventListener('click', ()=>{ period.m--; if(period.m<0){ period.m=11; period.y--; } renderMoney(); });
   document.getElementById('periodNext').addEventListener('click', ()=>{ period.m++; if(period.m>11){ period.m=0; period.y++; } renderMoney(); });
 
+  function renderAccChips(){
+    const wrap=document.getElementById('accChips'); if(!wrap) return;
+    const bal=ids=>transactions.filter(t=>txTouchesAccount(t,ids)).reduce((s,t)=>s+txSignedAmountForAccounts(t,ids),0);
+    const f=v=>balanceHidden?'••••':fmtMoney(Math.round(v*100)/100);
+    const all=accounts.map(a=>a.id);
+    let html=`<button class="acc-chip${activeAccountFilter==='all'?' on':''}" data-acc="all"><span class="n">Все счета</span><span class="b">${f(bal(all))}</span></button>`;
+    html+=accounts.map(a=>`<button class="acc-chip${activeAccountFilter===a.id?' on':''}" data-acc="${a.id}"><span class="n">${(a.name||'').replace(/[<>&]/g,'')}</span><span class="b">${f(bal([a.id]))}</span></button>`).join('');
+    wrap.innerHTML=html;
+    const on=wrap.querySelector('.on'); if(on && wrap.scrollWidth>wrap.clientWidth){ const l=on.offsetLeft, r=l+on.offsetWidth; if(l<wrap.scrollLeft) wrap.scrollLeft=Math.max(0,l-12); else if(r>wrap.scrollLeft+wrap.clientWidth) wrap.scrollLeft=r-wrap.clientWidth+12; }
+  }
+  document.getElementById('accChips').addEventListener('click', e=>{
+    const b=e.target.closest('[data-acc]'); if(!b) return;
+    activeAccountFilter=b.dataset.acc; const sel=document.getElementById('accountFilter'); sel.value=activeAccountFilter;
+    if(activeAccountFilter!=='all') document.getElementById('txAccount').value=activeAccountFilter;
+    haptic('select'); renderMoney();
+  });
   function accountIdsForFilter(){ return activeAccountFilter==='all' ? accounts.map(a=>a.id) : [activeAccountFilter]; }
   function txTouchesAccount(t, ids){
     if(t.type==='transfer') return ids.includes(t.fromAccountId) || ids.includes(t.toAccountId);
@@ -6186,8 +6223,9 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       <div class="stat-card"><div class="ic">${ICONS.up}</div><div class="num">${fmtMoney(totalIncome)}</div><div class="lbl">Доходы</div></div>
       <div class="stat-card"><div class="ic gold">${ICONS.down}</div><div class="num">${fmtMoney(totalExpense)}</div><div class="lbl">Расходы</div></div>
       <div class="stat-card"><div class="ic">${ICONS.wallet}</div><div class="num">${fmtMoney(balance)}</div><div class="lbl">Баланс за период</div></div>
-      <div class="stat-card"><div class="ic">${ICONS.list}</div><div class="num">${fmtMoney(running)}</div><div class="lbl">Остаток на ${fmtDateShort(periodEndStr())}</div></div>
+      <div class="stat-card"><div class="ic">${ICONS.list}</div><div class="num">${fmtMoney(running)}</div><div class="lbl">Остаток на ${fmtDateShort(periodEndStr())}${activeAccountFilter!=='all'&&accounts.find(a=>a.id===activeAccountFilter)?' · '+accounts.find(a=>a.id===activeAccountFilter).name:''}</div></div>
     `;
+    renderAccChips();
     renderTxList();
     if(!document.getElementById('sub-report').hidden) renderReport();
     if(!document.getElementById('sub-overview').hidden) renderOverview();
@@ -6203,27 +6241,30 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     return d.toLocaleDateString('ru-RU',{day:'numeric', month:'long'});
   }
   function renderOverview(){
-    const allIds = accounts.map(a=>a.id);
-    const totalBalance = transactions.reduce((s,t)=> s + txSignedAmountForAccounts(t, allIds), 0);
+    const ids = accountIdsForFilter(); const single = activeAccountFilter!=='all';
+    const accObj = single ? accounts.find(a=>a.id===activeAccountFilter) : null;
+    const mine = transactions.filter(t=>txTouchesAccount(t,ids));
+    const totalBalance = mine.reduce((s,t)=> s + txSignedAmountForAccounts(t, ids), 0);
+    const lbl = document.getElementById('finBalLbl'); if(lbl) lbl.textContent = single&&accObj ? ('Баланс · '+accObj.name) : 'Общий баланс';
     const balEl = document.getElementById('finBalanceNum');
     if(balanceHidden){ stopNumberAnim(balEl); balEl.textContent = '•••• ' + (CURRENCY_SYMBOLS[currency]||currency); }
     else animateNumber(balEl, totalBalance);
 
     const mStart = toDateStr(new Date(today.getFullYear(), today.getMonth(), 1));
-    const mIncome = transactions.filter(t=>t.type==='income' && t.date>=mStart).reduce((s,t)=>s+t.amount,0);
-    const mExpense = transactions.filter(t=>t.type==='expense' && t.date>=mStart).reduce((s,t)=>s+t.amount,0);
+    const mIncome = mine.filter(t=>t.type==='income' && t.date>=mStart).reduce((s,t)=>s+t.amount,0);
+    const mExpense = mine.filter(t=>t.type==='expense' && t.date>=mStart).reduce((s,t)=>s+t.amount,0);
     const mNet = mIncome - mExpense;
     const basis = totalBalance - mNet;
-    const pct = basis!==0 ? Math.round(mNet/Math.abs(basis)*1000)/10 : 0;
+    const pctTxt = monthPct(mNet, basis);
     const sign = mNet>=0 ? '+' : '';
     const changeEl = document.getElementById('finBalanceChange');
     changeEl.className = 'fin-balance-change ' + (mNet>=0?'up':'down');
-    changeEl.textContent = `${mNet>=0?'↑':'↓'} ${sign}${fmtMoney(mNet)} (${sign}${pct}%) за этот месяц`;
+    changeEl.textContent = `${mNet>=0?'↑':'↓'} ${sign}${fmtMoney(mNet)}${pctTxt?` (${pctTxt})`:''} за этот месяц`;
     document.getElementById('finIncomeVal').textContent = fmtMoney(mIncome);
     document.getElementById('finExpenseVal').textContent = fmtMoney(mExpense);
 
     const catSums = {};
-    transactions.filter(t=>t.type==='expense' && t.date>=mStart).forEach(t=>{ catSums[t.category]=(catSums[t.category]||0)+t.amount; });
+    mine.filter(t=>t.type==='expense' && t.date>=mStart).forEach(t=>{ catSums[t.category]=(catSums[t.category]||0)+t.amount; });
     const sorted = Object.entries(catSums).sort((a,b)=>b[1]-a[1]);
     const top = sorted.slice(0,4);
     const restTotal = sorted.slice(4).reduce((s,[,v])=>s+v,0);
@@ -6255,7 +6296,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       }).join('');
     }
 
-    const recent = transactions.slice().sort((a,b)=> b.date.localeCompare(a.date)).slice(0,4);
+    const recent = mine.slice().sort((a,b)=> b.date.localeCompare(a.date)).slice(0,4);
     const rtWrap = document.getElementById('finRecentTx');
     if(recent.length===0){
       rtWrap.innerHTML = '<div class="empty" style="padding:10px;">Операций пока нет.</div>';
@@ -6419,7 +6460,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     txInPeriod().filter(t=>t.type===reportType).forEach(t=>{ sums[t.category]=(sums[t.category]||0)+t.amount; });
     const entries = Object.entries(sums).sort((a,b)=>b[1]-a[1]);
     const total = entries.reduce((s,[,v])=>s+v,0);
-    document.getElementById('reportTotalLabel').textContent = reportType==='expense' ? 'Все расходы за период' : 'Все доходы за период';
+    { const _a = activeAccountFilter!=='all' ? accounts.find(a=>a.id===activeAccountFilter) : null; document.getElementById('reportTotalLabel').textContent = (reportType==='expense' ? 'Все расходы за период' : 'Все доходы за период') + (_a ? ' · '+_a.name : ''); }
     document.getElementById('reportTotalValue').textContent = fmtMoney(total);
     if(entries.length===0){ wrapPie.style.background = '#2B2F35'; wrapLegend.innerHTML = '<div class="empty">Нет данных за этот период.</div>'; return; }
     let acc=0; const stops=[];
@@ -6670,11 +6711,27 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     }
     return streak;
   }
+  function monthPct(mNet, basis){
+    if(!isFinite(mNet) || !isFinite(basis) || Math.abs(basis)<1) return '';
+    const p=Math.round(mNet/Math.abs(basis)*1000)/10; if(!isFinite(p) || Math.abs(p)>9999) return '';
+    return (p>=0?'+':'')+p.toLocaleString('ru-RU')+'%';
+  }
+  function fitNum(el, txt){
+    if(!el) return; try{
+      el.style.fontSize=''; const avail=el.clientWidth||(el.parentElement&&el.parentElement.clientWidth)||0; if(!avail) return;
+      const cs=getComputedStyle(el); const pr=document.createElement('span');
+      pr.style.cssText='position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap;font-variant-numeric:tabular-nums;';
+      pr.style.fontFamily=cs.fontFamily; pr.style.fontWeight=cs.fontWeight; pr.style.fontSize=cs.fontSize; pr.style.letterSpacing=cs.letterSpacing;
+      pr.textContent=txt!=null?txt:el.textContent; document.body.appendChild(pr); const w=pr.getBoundingClientRect().width; pr.remove();
+      if(w>avail) el.style.fontSize=(parseFloat(cs.fontSize)*avail/w*0.96).toFixed(1)+'px';
+    }catch(e){}
+  }
   function animateNumber(el, to, suffix){
     const token = String(Date.now())+Math.random();
     el.dataset.animToken = token;
     const from = parseFloat((el.dataset.raw||'0')); const dur=550; const start=performance.now();
-    el.dataset.raw = to;
+    if(el.dataset.raw!==undefined && Math.abs(from-to)<0.5){ el.dataset.raw=to; el.textContent=(suffix ? Math.round(to).toLocaleString('ru-RU')+suffix : fmtMoney(Math.round(to))); fitNum(el, el.textContent); return; }
+    el.dataset.raw = to; fitNum(el, suffix ? Math.round(to).toLocaleString('ru-RU')+suffix : fmtMoney(Math.round(to)));
     function step(now){
       if(el.dataset.animToken !== token) return;
       const p = Math.min(1,(now-start)/dur); const eased = 1-Math.pow(1-p,3);
@@ -6705,9 +6762,9 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     const mExpense = transactions.filter(t=>t.type==='expense' && t.date>=mStart).reduce((s,t)=>s+t.amount,0);
     const mNet = mIncome - mExpense;
     const basis = totalBalance - mNet;
-    const pct = basis!==0 ? Math.round(mNet/Math.abs(basis)*1000)/10 : 0;
+    const pctTxt = monthPct(mNet, basis);
     const sign = mNet>=0 ? '+' : '';
-    document.getElementById('dashMonthSub').innerHTML = `<span style="color:${mNet>=0?'var(--gold)':'var(--red-bright)'}">${sign}${fmtMoney(mNet)} (${sign}${pct}%)</span> за месяц`;
+    document.getElementById('dashMonthSub').innerHTML = `<span style="color:${mNet>=0?'var(--gold)':'var(--red-bright)'}">${sign}${fmtMoney(mNet)}${pctTxt?` (${pctTxt})`:''}</span> за месяц`;
     const acc0 = accounts[0];
     document.getElementById('miniCardLast4').textContent = acc0 ? String(Math.abs(acc0.id.split('').reduce((a,c)=>(a*31+c.charCodeAt(0))%10000,7))).padStart(4,'0') : '0000';
 
@@ -6750,7 +6807,8 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     document.getElementById('widgetHabitsSub').textContent = `🔥 ${gStreak} ${gStreak===1?'день':(gStreak>=2&&gStreak<=4?'дня':'дней')} подряд`;
 
     document.getElementById('widgetFinanceBig').textContent = fmtMoney(totalBalance);
-    document.getElementById('widgetFinanceSub').innerHTML = `<span style="color:${mNet>=0?'var(--gold)':'var(--red-bright)'}">${sign}${pct}%</span> за месяц`;
+    fitNum(document.getElementById('widgetFinanceBig'), fmtMoney(totalBalance));
+    document.getElementById('widgetFinanceSub').innerHTML = `<span style="color:${mNet>=0?'var(--gold)':'var(--red-bright)'}">${pctTxt || (sign+fmtMoney(mNet))}</span> за месяц`;
     const wAllIds = accounts.map(a=>a.id);
     const wDays=[]; for(let i=13;i>=0;i--){ const d=new Date(today); d.setDate(d.getDate()-i); wDays.push(toDateStr(d)); }
     let wRunning=0;
