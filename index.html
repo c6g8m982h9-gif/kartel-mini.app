@@ -221,6 +221,183 @@
   @media (min-width:520px){ .dash-grid2{ grid-template-columns:1.3fr 1fr; } }
 
   /* ---- home widgets ---- */
+
+  .w-invest{ display:block; width:100%; text-align:left; cursor:pointer; padding:18px; margin-bottom:16px; border-radius:26px; color:var(--ink); font-family:inherit; border:1px solid var(--line); background:var(--card2); }
+  .w-invest:active{ transform:scale(.985); }
+  .wi-top{ display:flex; justify-content:space-between; align-items:center; }
+  .wi-title{ font-size:14px; color:var(--muted); font-weight:600; letter-spacing:.2px; }
+  .wi-ic{ width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:color-mix(in srgb,var(--red-bright) 16%,transparent); font-size:16px; }
+  .wi-big{ font-size:34px; font-weight:800; letter-spacing:-.5px; margin:10px 0 4px; white-space:nowrap; }
+  .wi-big small{ font-size:15px; font-weight:700; color:var(--muted); margin-left:6px; }
+  .wi-sub{ font-size:13px; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 14px; }
+  .wi-sub .up{ color:#2ee59d; font-weight:700; } .wi-sub .dn{ color:#ff5468; font-weight:700; }
+  .wi-bar{ display:flex; height:8px; border-radius:99px; overflow:hidden; margin-top:14px; gap:2px; background:rgba(255,255,255,.06); }
+  .wi-bar i{ display:block; height:100%; }
+  .wi-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px; font-size:12px; color:var(--muted); }
+  .wi-legend b{ color:var(--ink); font-weight:700; }
+  .wi-legend span::before{ content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:6px; }
+
+  /* ---- home redesign ---- */
+  #dash-view{ display:flex; flex-direction:column; }
+  #dash-view > *{ order:20; }
+  #dash-view > .dash-header{ order:0; } #dash-view > .home-hero{ order:1; } #dash-view > .widget-planner-card{ order:2; }
+  #dash-view > .widget-row{ order:3; } #dash-view > .w-invest{ order:4; } #dash-view > .recap-banner{ order:5; }
+  #dash-view > .streak-chip{ display:none; }
+  .home-hero{ position:relative; overflow:hidden; border-radius:30px; padding:20px 20px 16px; margin-bottom:14px; color:#fff;
+    background:radial-gradient(120% 90% at 0% 0%,rgba(255,70,60,.92),rgba(190,20,40,.9) 45%,rgba(90,20,120,.92) 100%);
+    box-shadow:0 30px 60px -30px rgba(255,50,40,.6), inset 0 1px 0 rgba(255,255,255,.35); }
+  .home-hero::before{ content:""; position:absolute; width:260px; height:260px; right:-90px; top:-110px; border-radius:50%; background:radial-gradient(circle,rgba(255,200,120,.55),rgba(255,200,120,0) 65%); animation:hhFloat 9s ease-in-out infinite alternate; pointer-events:none; }
+  .home-hero::after{ content:""; position:absolute; width:220px; height:220px; left:-80px; bottom:-120px; border-radius:50%; background:radial-gradient(circle,rgba(150,80,255,.5),rgba(150,80,255,0) 65%); animation:hhFloat 12s ease-in-out infinite alternate-reverse; pointer-events:none; }
+  @keyframes hhFloat{ to{ transform:translate3d(-26px,22px,0) scale(1.15); } }
+  .hh-sheen{ position:absolute; inset:0; background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%); transform:translateX(-120%); animation:hhSheen 6s ease-in-out 1.2s infinite; pointer-events:none; }
+  @keyframes hhSheen{ 0%,55%{ transform:translateX(-120%); } 85%,100%{ transform:translateX(120%); } }
+  .hh-top{ position:relative; z-index:1; display:flex; justify-content:space-between; align-items:center; }
+  .hh-lbl{ font-size:13px; font-weight:600; letter-spacing:.3px; opacity:.85; }
+  .hh-eye{ background:rgba(255,255,255,.18); border:none; color:#fff; width:32px; height:32px; border-radius:50%; font-size:14px; cursor:pointer; }
+  .hh-big{ position:relative; z-index:1; font-size:40px; font-weight:800; letter-spacing:-1px; margin:8px 0 2px; white-space:nowrap; overflow:hidden; }
+  .hh-delta{ position:relative; z-index:1; font-size:13px; opacity:.92; display:flex; flex-wrap:wrap; gap:2px 14px; min-height:18px; }
+  .hh-delta b{ font-weight:700; }
+  .hh-split{ position:relative; z-index:1; display:flex; height:7px; border-radius:99px; overflow:hidden; gap:2px; margin-top:14px; background:rgba(0,0,0,.22); }
+  .hh-split i{ display:block; height:100%; border-radius:99px; transition:width .9s cubic-bezier(.2,.8,.2,1); }
+  .hh-leg{ position:relative; z-index:1; display:flex; gap:14px; margin-top:8px; font-size:12px; opacity:.9; }
+  .hh-leg span::before{ content:""; display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--c); margin-right:6px; }
+  .hh-tiles{ position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:16px; }
+  .hh-tile{ display:flex; flex-direction:column; align-items:center; gap:2px; padding:10px 4px 9px; border-radius:20px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.14); color:#fff; font-family:inherit; cursor:pointer; position:relative; }
+  .hh-tile:active{ transform:scale(.95); }
+  .hh-ic{ font-size:20px; height:30px; line-height:30px; }
+  .hh-ring{ width:30px; height:30px; transform:rotate(-90deg); }
+  .hh-ring circle{ fill:none; stroke-width:5; } .hh-ring .rb{ stroke:rgba(255,255,255,.25); } .hh-ring .rf{ stroke:#fff; stroke-linecap:round; transition:stroke-dasharray 1s cubic-bezier(.2,.8,.2,1); }
+  .hh-tv{ font-size:18px; font-weight:800; } .hh-tl{ font-size:10.5px; opacity:.8; }
+
+  /* ---- cleanup ---- */
+  #dash-view .dash-header-actions, #dash-view .dash-grid2, #habits-view #openAchievementsBtn, #planner-view .pl-header, #money-view .fin-welcome{ display:none !important; }
+
+  /* ---- challenges redesign ---- */
+  .chal-new{ margin-left:auto; padding:8px 14px; border-radius:99px; border:none; background:rgba(255,255,255,.1); color:var(--ink); font-family:inherit; font-size:13px; font-weight:700; cursor:pointer; }
+  #challengesList .stat-grid{ margin-bottom:14px; }
+  .chal-ring{ position:relative; flex:none; } .chal-ring span{ position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-size:15px; color:#fff; }
+  .chal-hero{ border-radius:28px; padding:18px; margin-bottom:4px; color:#fff; background:linear-gradient(140deg,color-mix(in srgb,var(--cc,#ff5a4a) 80%,transparent),rgba(110,30,140,.6)); box-shadow:0 26px 50px -28px var(--cc,#ff5a4a), inset 0 1px 0 rgba(255,255,255,.3); }
+  .chal-hero-in{ display:flex; gap:14px; align-items:center; }
+  .chal-hero-t{ flex:1; min-width:0; } .chal-hero-k{ font-size:11px; font-weight:700; letter-spacing:.5px; opacity:.85; }
+  .chal-hero-n{ font-size:19px; font-weight:800; margin:3px 0; } .chal-hero-s{ font-size:12.5px; opacity:.9; }
+  .chal-hero-btn{ width:100%; margin-top:14px; padding:13px; border:none; border-radius:99px; background:#fff; color:#111; font-family:inherit; font-size:14px; font-weight:800; cursor:pointer; }
+  .chal-hero-btn.done{ background:rgba(255,255,255,.25); color:#fff; } .chal-hero-btn:active{ transform:scale(.97); }
+  .chal-row{ padding:12px 14px !important; margin-bottom:9px !important; border-radius:22px !important; } .chal-row.ended{ opacity:.7; }
+  .chal-row-main{ display:flex; align-items:center; gap:10px; }
+  .chal-row-l{ flex:1; min-width:0; display:flex; align-items:center; gap:12px; background:none; border:none; padding:0; text-align:left; color:var(--ink); font-family:inherit; cursor:pointer; }
+  .chal-row-t{ display:flex; flex-direction:column; min-width:0; } .chal-row-t b{ font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .chal-row-t small{ font-size:12px; color:var(--muted); }
+  .chal-chip{ padding:8px 13px; border-radius:99px; border:none; background:rgba(255,255,255,.1); color:var(--ink); font-family:inherit; font-size:12px; font-weight:700; white-space:nowrap; flex:none; }
+  .chal-chip.go{ background:#fff; color:#111; cursor:pointer; } .chal-chip.ok{ background:rgba(46,229,157,.18); color:#2ee59d; }
+  .chal-row-more{ margin-top:12px; }
+
+  .chal-gridwrap{ margin-top:14px; }
+  .chal-grid{ display:grid; gap:4px; }
+  .chal-grid .gc{ display:grid; place-items:center; aspect-ratio:1; border-radius:7px; font-style:normal; font-size:10px; font-weight:700; color:rgba(255,255,255,.35); background:rgba(0,0,0,.28); transition:transform .15s ease, background .25s; cursor:pointer; }
+  .chal-grid .gc:active{ transform:scale(.8); }
+  .chal-grid .gc.fut{ background:rgba(255,255,255,.06); cursor:default; color:rgba(255,255,255,.22); }
+  .chal-grid .gc.on{ background:var(--cc,var(--red-bright)); color:#fff; box-shadow:0 0 10px -2px var(--cc,var(--red-bright)); } .chal-grid .gc.td{ outline:2px solid #fff; outline-offset:1px; }
+  .chal-hero .chal-grid .gc{ background:rgba(255,255,255,.14); color:rgba(255,255,255,.55); } .chal-hero .chal-grid .gc.on{ background:#fff; color:#111; box-shadow:none; } .chal-hero .chal-grid .gc.fut{ background:rgba(255,255,255,.07); }
+  .chal-gfoot{ margin-top:10px; font-size:12px; font-weight:600; color:var(--ink); } .chal-hero .chal-gfoot{ color:#fff; }
+
+  /* ---- card wallet ---- */
+  .cw{ position:fixed; inset:0; z-index:95; display:flex; flex-direction:column; align-items:center; justify-content:center; visibility:hidden; pointer-events:none; padding:20px 0 30px; }
+  .cw.show{ visibility:visible; pointer-events:auto; }
+  .cw-bg{ position:absolute; inset:0; background:radial-gradient(70% 50% at 50% 38%,rgba(255,60,50,.22),transparent 70%),rgba(6,3,5,.82); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); opacity:0; transition:opacity .4s ease; }
+  .cw.show .cw-bg{ opacity:1; }
+  .cw-x{ position:absolute; top:calc(env(safe-area-inset-top,0px) + 18px); right:18px; width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,.12); color:#fff; font-size:22px; cursor:pointer; z-index:3; opacity:0; transition:opacity .4s ease .15s; }
+  .cw.show .cw-x{ opacity:1; }
+  .cw-stage{ position:relative; width:min(340px,86vw); aspect-ratio:1.586; margin:0 0 34px; touch-action:none; z-index:2; perspective:1000px; }
+  .cw-card{ position:absolute; inset:0; border-radius:26px; padding:20px; color:#fff; overflow:hidden; background:linear-gradient(135deg,var(--g1),var(--g2)); box-shadow:0 30px 50px -24px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.35); will-change:transform,opacity; cursor:grab; user-select:none; -webkit-user-select:none; transform-origin:50% 100%; }
+  .cw-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(115deg,transparent calc(var(--sx,50%) - 22%),rgba(255,255,255,.22) var(--sx,50%),transparent calc(var(--sx,50%) + 22%)); pointer-events:none; }
+  .cw-card::before{ content:""; position:absolute; width:240px; height:240px; right:-80px; top:-100px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.28),transparent 65%); pointer-events:none; }
+  .cw-top{ display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+  .cw-logo{ font-size:20px; font-weight:800; letter-spacing:4px; } .cw-tag{ font-size:11px; font-weight:700; letter-spacing:1px; opacity:.85; padding:4px 10px; border-radius:99px; background:rgba(255,255,255,.18); }
+  .cw-chip{ width:44px; height:32px; border-radius:7px; background:linear-gradient(135deg,#f6e2a4,#c9a24c 55%,#f2d68a); margin:20px 0 14px; position:relative; z-index:1; }
+  .cw-num{ position:relative; z-index:1; font-size:16px; letter-spacing:3px; opacity:.92; font-variant-numeric:tabular-nums; }
+  .cw-bot{ position:absolute; left:20px; right:20px; bottom:18px; display:flex; justify-content:space-between; align-items:flex-end; z-index:1; }
+  .cw-cn{ font-size:15px; font-weight:700; max-width:60%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .cw-brand{ font-size:11px; letter-spacing:2px; opacity:.75; }
+  .cw-info{ position:relative; z-index:2; width:min(340px,86vw); text-align:center; color:#fff; opacity:0; transform:translate3d(0,24px,0); transition:opacity .45s ease .2s, transform .55s cubic-bezier(.2,.9,.3,1) .2s; }
+  .cw.show .cw-info{ opacity:1; transform:none; }
+  .cw-dots{ display:flex; justify-content:center; gap:7px; margin-bottom:14px; } .cw-dots i{ width:7px; height:7px; border-radius:99px; background:rgba(255,255,255,.25); transition:width .3s ease, background .3s ease; } .cw-dots i.on{ width:22px; background:#fff; }
+  .cw-name2{ font-size:15px; color:#bba; font-weight:600; } .cw-bal{ font-size:36px; font-weight:800; letter-spacing:-1px; margin:2px 0 12px; }
+  .cw-info .sw{ animation:cwSw .35s ease both; } @keyframes cwSw{ from{ opacity:0; transform:translate3d(0,8px,0);} to{ opacity:1; transform:none;} }
+  .cw-io{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; } .cw-io div{ padding:10px 12px; border-radius:16px; background:rgba(255,255,255,.07); } .cw-io span{ display:block; font-size:11px; color:#a99; } .cw-io b{ font-size:16px; } .cw-io .up{ color:#2ee59d; } .cw-io .dn{ color:#ff5468; }
+  .cw-ok{ width:100%; padding:14px; border:none; border-radius:99px; background:#fff; color:#111; font-family:inherit; font-size:15px; font-weight:800; cursor:pointer; } .cw-ok:active{ transform:scale(.97); }
+  .cw-hint{ margin-top:10px; font-size:11.5px; color:#8a7f80; }
+  .acc-chip{ cursor:pointer; }
+
+  .acc-chips{ overflow:visible; display:block; }
+  .acc-widget{ width:100%; display:flex !important; align-items:center; gap:14px; padding:14px 16px !important; border-radius:24px !important; text-align:left; cursor:pointer; color:var(--ink); font-family:inherit; margin:0 !important; }
+  .acc-widget:active{ transform:scale(.98); }
+  .aw-stack{ position:relative; width:50px; height:36px; flex:none; } .aw-stack i{ position:absolute; left:0; right:0; border-radius:8px; height:26px; box-shadow:0 4px 10px -4px rgba(0,0,0,.6); }
+  .aw-stack i:nth-child(1){ top:0; background:linear-gradient(135deg,#8a5cf5,#2a1466); transform:scale(.8); opacity:.7; } .aw-stack i:nth-child(2){ top:5px; background:linear-gradient(135deg,#e0a53a,#4a2a0e); transform:scale(.9); opacity:.85; } .aw-stack i:nth-child(3){ top:10px; background:linear-gradient(135deg,#ff4a3f,#7a1fa8); }
+  .aw-t{ display:flex; flex-direction:column; flex:1; min-width:0; } .aw-t small{ font-size:11.5px; color:var(--muted); font-weight:600; } .aw-t b{ font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .aw-v{ font-size:17px; font-weight:800; white-space:nowrap; } .aw-go{ font-size:22px; color:var(--muted); line-height:1; }
+
+  /* ---- full colour picker ---- */
+  .cs-add{ background:conic-gradient(#ff3b30,#ff9500,#ffcc00,#34c759,#00c7be,#007aff,#af52de,#ff2d55,#ff3b30) !important; position:relative; }
+  .cs-add::after{ content:"+"; position:absolute; inset:3px; border-radius:50%; background:rgba(10,5,6,.78); color:#fff; display:grid; place-items:center; font-size:16px; font-weight:700; line-height:1; }
+  .cp{ position:fixed; inset:0; z-index:120; display:flex; align-items:flex-end; justify-content:center; visibility:hidden; pointer-events:none; }
+  .cp.show{ visibility:visible; pointer-events:auto; }
+  .cp-bg{ position:absolute; inset:0; background:rgba(0,0,0,.55); opacity:0; transition:opacity .25s ease; } .cp.show .cp-bg{ opacity:1; }
+  .cp-card{ position:relative; width:100%; max-width:420px; border-radius:28px 28px 0 0; padding:16px 18px calc(env(safe-area-inset-bottom,0px) + 20px); background:linear-gradient(160deg,#241318,#130a10); border:1px solid rgba(255,255,255,.16); border-bottom:none; color:#fff; transform:translate3d(0,100%,0); transition:transform .4s cubic-bezier(.2,.9,.3,1); box-shadow:0 -30px 60px -20px #000; }
+  .cp.show .cp-card{ transform:none; }
+  .cp-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .cp-prev{ width:42px; height:42px; border-radius:50%; flex:none; border:2px solid rgba(255,255,255,.4); background:#ff5a45; }
+  .cp-hex{ flex:1; min-width:0; padding:11px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.07); color:#fff; font-family:ui-monospace,Menlo,monospace; font-size:16px; text-transform:uppercase; }
+  .cp-ok{ padding:11px 20px; border:none; border-radius:99px; background:#fff; color:#111; font-family:inherit; font-size:14px; font-weight:800; cursor:pointer; }
+  .cp-sv{ position:relative; height:170px; border-radius:18px; touch-action:none; cursor:crosshair; background:linear-gradient(to top,#000,rgba(0,0,0,0)),linear-gradient(to right,#fff,hsl(var(--h,0),100%,50%)); }
+  .cp-th{ position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 3px 10px rgba(0,0,0,.5); pointer-events:none; }
+  .cp .cp-hue{ -webkit-appearance:none; appearance:none; width:100%; height:16px; padding:0; border:none; border-radius:99px; margin:16px 0 4px; background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00) !important; outline:none; }
+  .cp-hue::-webkit-slider-runnable-track{ background:transparent; height:16px; }
+  .cp-hue::-webkit-slider-thumb{ -webkit-appearance:none; width:26px; height:26px; border-radius:50%; background:#fff; border:3px solid rgba(0,0,0,.25); box-shadow:0 2px 8px rgba(0,0,0,.5); }
+  .cp-hue::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:#fff; border:3px solid rgba(0,0,0,.25); }
+  .cp-lbl{ font-size:11px; font-weight:700; letter-spacing:.5px; color:#a99; margin:14px 0 8px; }
+  .cp-pre{ display:grid; grid-template-columns:repeat(10,1fr); gap:7px; } .cp-pre i{ aspect-ratio:1; border-radius:50%; cursor:pointer; border:2px solid transparent; } .cp-pre i:active{ transform:scale(.85); }
+  /* ---- compact home grid ---- */
+  #dash-view > .home-hero, #dash-view > .widget-planner-card, #dash-view > .widget-row, #dash-view > .w-invest{ display:none !important; }
+  #dash-view .balance-card{ display:none; } #dash-view .dash-grid2{ grid-template-columns:1fr; }
+  #dash-view > .hg{ order:1; }
+  .hg{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+  .hg-t{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-align:left; padding:12px 14px 12px !important; border-radius:22px !important; min-height:0; cursor:pointer; color:var(--ink); font-family:inherit; margin:0 !important; min-width:0; }
+  .hg-t:active{ transform:scale(.96); }
+  .hg-wide{ grid-column:1 / -1; flex-direction:row; align-items:center; justify-content:space-between; }
+  .hg-l{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .hg-k{ font-size:11.5px; font-weight:600; color:var(--muted); letter-spacing:.2px; }
+  .hg-v{ font-size:21px; font-weight:800; letter-spacing:-.4px; white-space:nowrap; max-width:100%; overflow:hidden; text-overflow:ellipsis; }
+  .hg-wide .hg-v{ font-size:26px; }
+  .hg-s{ font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  .hg-s .up,.hg-pill .up{ color:#2ee59d; font-weight:700; } .hg-s .dn,.hg-pill .dn{ color:#ff5468; font-weight:700; }
+  .hg-pill{ font-size:12px; padding:6px 10px; border-radius:99px; background:rgba(255,255,255,.08); white-space:nowrap; }
+  .hg-bar{ display:block; width:100%; height:5px; border-radius:9px; background:rgba(255,255,255,.1); overflow:hidden; margin-top:3px; }
+  .hg-bar i{ display:block; height:100%; border-radius:9px; background:linear-gradient(90deg,var(--red-bright),#ffb36b); transition:width .8s cubic-bezier(.2,.8,.2,1); }
+  /* invest modal */
+  .iv-modal{ position:fixed; inset:0; z-index:90; display:flex; align-items:center; justify-content:center; padding:18px; visibility:hidden; pointer-events:none; }
+  .iv-modal.show{ visibility:visible; pointer-events:auto; }
+  .ivm-bg{ position:absolute; inset:0; background:rgba(0,0,0,.6); opacity:0; transition:opacity .25s ease; }
+  .iv-modal.show .ivm-bg{ opacity:1; }
+  .ivm-card{ position:relative; width:100%; max-width:380px; height:min(76vh,600px); display:flex; flex-direction:column; border-radius:30px; padding:16px; background:linear-gradient(160deg,#241318,#130a10); border:1px solid rgba(255,255,255,.16); box-shadow:0 40px 80px -20px #000, inset 0 1px 0 rgba(255,255,255,.2); color:#fff; opacity:0; transform:translate3d(0,14px,0) scale(.94); transition:opacity .25s ease, transform .35s cubic-bezier(.2,.9,.3,1.15); }
+  .iv-modal.show .ivm-card{ opacity:1; transform:none; }
+  .ivm-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .ivm-title{ font-size:18px; font-weight:800; }
+  .ivm-x{ width:34px; height:34px; border-radius:50%; border:none; background:rgba(255,255,255,.1); color:#fff; font-size:20px; cursor:pointer; }
+  .ivm-seg{ display:grid; grid-template-columns:1fr 1fr; gap:4px; padding:4px; border-radius:99px; background:rgba(255,255,255,.07); margin-bottom:12px; }
+  .ivm-seg button{ border:none; border-radius:99px; padding:10px; font-size:14px; font-weight:700; background:none; color:#bbb; font-family:inherit; cursor:pointer; transition:background .25s, color .25s; }
+  .ivm-seg button.on{ background:#fff; color:#111; }
+  .ivm-body{ overflow-y:auto; -webkit-overflow-scrolling:touch; min-height:120px; flex:1; animation:ivmIn .3s ease; }
+  @keyframes ivmIn{ from{ opacity:0; transform:translate3d(0,8px,0);} to{ opacity:1; transform:none;} }
+  .ivm-big{ font-size:32px; font-weight:800; letter-spacing:-.6px; } .ivm-big small{ font-size:14px; color:#a99; margin-left:6px; }
+  .ivm-sub{ font-size:13px; color:#a99; margin-top:2px; display:flex; flex-wrap:wrap; gap:2px 12px; }
+  .ivm-sub .up,.ivm-up{ color:#2ee59d; font-weight:700; } .ivm-sub .dn,.ivm-dn{ color:#ff5468; font-weight:700; }
+  .ivm-row{ display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid rgba(255,255,255,.08); cursor:pointer; }
+  .ivm-ico{ width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:13px; background:rgba(255,255,255,.1); flex:none; }
+  .ivm-mid{ flex:1; min-width:0; } .ivm-mid b{ display:block; font-size:14px; } .ivm-mid span{ font-size:11.5px; color:#a99; }
+  .ivm-r{ text-align:right; } .ivm-r b{ display:block; font-size:14px; } .ivm-r span{ font-size:11.5px; }
+  .ivm-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0 4px; }
+  .ivm-cell{ padding:10px 12px; border-radius:16px; background:rgba(255,255,255,.06); } .ivm-cell span{ display:block; font-size:11px; color:#a99; margin-bottom:2px; } .ivm-cell b{ font-size:16px; }
+  .ivm-h{ font-size:11px; font-weight:700; letter-spacing:.5px; color:#a99; margin:14px 0 2px; }
+  .ivm-empty{ text-align:center; color:#a99; padding:26px 8px; font-size:14px; line-height:1.4; }
+  .ivm-open{ margin-top:12px; padding:13px; border-radius:99px; border:none; font-family:inherit; font-size:14px; font-weight:700; color:#fff; cursor:pointer; background:linear-gradient(150deg,#ff4a3f,#b01020); }
   .widget-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
   .widget-card{ border-radius:18px; padding:16px; text-align:left; cursor:pointer; border:1px solid var(--line); color:var(--ink); font-family:inherit; }
   .widget-card.w-habits{ background:linear-gradient(155deg, var(--red-soft), var(--card2) 70%); }
@@ -1416,9 +1593,97 @@
   .iv-cap b{ display:block; font-size:14.5px; } .iv-cap span{ display:block; font-size:11.5px; color:var(--muted); margin-top:2px; }
   .iv-img .iv-card-cv{ margin:0; }
   .iv-stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0; }
+
+/* ===== theme: Glass (visionOS-like frosted glass over the KARTEL K) ===== */
+body.theme-glass.theme-neon{
+  --bg:#050203; --bg2:#0b0506; --card:rgba(28,11,13,.58); --card2:rgba(255,255,255,.075); --line:rgba(255,255,255,.15);
+  --hair:rgba(255,255,255,.11); --surface:rgba(255,255,255,.05); --muted:rgba(255,236,236,.62); --muted-soft:rgba(255,236,236,.4);
+  background:#050203;
+}
+#glassBg{ display:none; }
+body.theme-glass.theme-neon #glassBg{
+  display:block; position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  background:linear-gradient(180deg,#0a0507 0%,#070304 55%,#0b0408 100%);
+}
+#glassBg::before,#glassBg::after,#glassBg i{ content:""; position:absolute; border-radius:50%; will-change:transform; }
+#glassBg::before{ width:90vmax; height:90vmax; left:-35vmax; top:-40vmax;
+  background:radial-gradient(circle,rgba(255,45,45,.30),rgba(255,45,45,0) 62%); animation:gBlob1 26s ease-in-out infinite alternate; }
+#glassBg::after{ width:80vmax; height:80vmax; right:-38vmax; bottom:-34vmax;
+  background:radial-gradient(circle,rgba(150,40,255,.24),rgba(150,40,255,0) 62%); animation:gBlob2 32s ease-in-out infinite alternate; }
+#glassBg i{ width:60vmax; height:60vmax; left:20vmax; top:38vh;
+  background:radial-gradient(circle,rgba(255,130,40,.16),rgba(255,130,40,0) 62%); animation:gBlob3 38s ease-in-out infinite alternate; }
+@keyframes gBlob1{to{transform:translate3d(14vmax,10vmax,0) scale(1.12)}}
+@keyframes gBlob2{to{transform:translate3d(-12vmax,-14vmax,0) scale(1.15)}}
+@keyframes gBlob3{to{transform:translate3d(-16vmax,-8vmax,0) scale(.9)}}
+#glassFx{ display:none; }
+body.theme-glass.theme-neon #glassFx{ display:block; position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+body.theme-glass.theme-neon::before{
+  z-index:1; background:
+    linear-gradient(180deg,rgba(4,1,2,.62) 0%,rgba(4,1,2,.18) 38%,rgba(4,1,2,.30) 62%,rgba(4,1,2,.82) 100%),
+    radial-gradient(40% 28% at 50% 36%, rgba(255,46,36,.22), transparent 70%),
+    radial-gradient(34% 24% at 90% 90%, rgba(255,60,40,.18), transparent 70%);
+  animation:ambDrift 18s ease-in-out infinite alternate;
+}
+body.theme-glass.theme-neon #app{ z-index:2; }
+body.theme-glass.theme-neon :is(.stat-card,/* ---- dashboard ---- */
+  .dash-card,.icon-circle,.widget-card.w-habits,.widget-card.w-finance,.week-day-circle,.qa-btn,.ach-card,.task-tag.low,.qa-toast,/* ---- habits ---- */
+  .today-progress,.weekday-picker button,.habit-add-card,.habit-card,.archived-row,.toolbar-icon-btn,.timeline-card,.timeline-empty,.day-timeline-cta,.chal-duration-row button,.pl-bell,.pl-quick-row button,.pl-footer-card,.scan-cta,.scan-cta-ic,.scan-offline,.scan-alt,.scan-tips,.scan-raw,.pl-cal-box,.pl-cal-head button,.pl-cal-note,.pl-cal-actions button,.pl-mini-box,.panel-close,.group-row,.reorder-row,.reorder-row .rbtns button,.vac-card,.ach-summary,.type-radio-row button,.modal-box,.modal-btns button,.subtab,.fin-balance-card,.fin-qa,.fin-card,.fin-donut-center,.tx-form,.cat-picker-btn,.trend,.tx-item,.report-total,.budget-card,.goal-form,.goal-card,.settings-card,.theme-btns button,.custom-theme-del,.theme-editor,.qa-sheet,.bk-row,.today-progress,.scan-cta),.pl-quick-row button),.widget-planner-card,.fin-tx-ic,/* ---- sheets,dialogs,.pl-mini-box),.modal-box),/* ===== theme color tuning ===== */
+  .theme-tune,.tt-reset,.trend-seg,.trend-legend .lg,.iv-hero,.iv-card,.iv-empty,.iv-chart,.iv-segf button,.iv-prev,.iv-per,.iv-ico,.iv-res,/* ---- recap + savings ---- */
+.recap-card,.ss-box,.ss-goal,.ss-empty,.sh-act .g,.recap-card,.recap-banner),.goal-form),.iv-cell){
+  background:linear-gradient(150deg,rgba(255,255,255,.125),rgba(255,255,255,.035) 55%,rgba(255,255,255,.07)) !important;
+  border:1px solid rgba(255,255,255,.17) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26), inset 0 -1px 0 rgba(255,255,255,.04), 0 26px 52px -28px rgba(0,0,0,.85) !important;
+  transition:transform .45s cubic-bezier(.2,.9,.3,1.25), border-color .3s, box-shadow .3s;
+}
+body.theme-glass.theme-neon .balance-card, body.theme-glass.theme-neon .fin-balance-card{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 30px 60px -28px rgba(255,50,40,.55) !important;
+}
+body.theme-glass.theme-neon .nav-capsule{
+  -webkit-backdrop-filter:blur(30px) saturate(1.8); backdrop-filter:blur(30px) saturate(1.8);
+  background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.05)) !important;
+  border:1px solid rgba(255,255,255,.2) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 20px 50px -18px rgba(0,0,0,.9) !important;
+}
+body.theme-glass.theme-neon .nav-pill{ transition:transform .55s cubic-bezier(.2,.9,.25,1.15), width .55s cubic-bezier(.2,.9,.25,1.15) !important; }
+body.theme-glass.theme-neon .nav-btn{ transition:transform .4s cubic-bezier(.2,.9,.3,1.3), color .3s; }
+body.theme-glass.theme-neon .nav-btn:active{ transform:scale(.9); }
+body.theme-glass.theme-neon :is(.subtabs,.iv-ptabs){ }
+body.theme-glass.theme-neon .subtab.active{ box-shadow:0 6px 22px -8px rgba(255,255,255,.5), inset 0 1px 0 #fff; }
+body.theme-glass.theme-neon :is(.btn,.qa-btn,.fin-qa,.subtab,.iv-card,.stat-card,.goal-card){ transition:transform .35s cubic-bezier(.2,.9,.3,1.3), filter .25s, box-shadow .3s; }
+body.theme-glass.theme-neon :is(.btn,.qa-btn,.fin-qa,.subtab,.iv-card,.stat-card,.goal-card):active{ transform:scale(.965); transition-duration:.12s; }
+@media (hover:hover){ body.theme-glass.theme-neon :is(.iv-card,.stat-card,.goal-card,.dash-card,.settings-card):hover{ transform:translateY(-3px); border-color:rgba(255,255,255,.3) !important; } }
+/* panels: blur/scale in instead of sliding */
+body.theme-glass.theme-neon .panel-overlay{
+  background:radial-gradient(60% 40% at 50% 30%,rgba(255,50,40,.13),transparent 70%),rgba(7,3,4,.985);
+  opacity:0; visibility:hidden; transform:translate3d(0,22px,0);
+  transition:opacity .3s ease, transform .45s cubic-bezier(.2,.85,.25,1), visibility 0s linear .45s;
+}
+body.theme-glass.theme-neon .panel-overlay.show{ opacity:1; visibility:visible; transform:none; transition-delay:0s; }
+/* view transitions: blur-out, then staggered blur-in cards */
+@keyframes gIn{ from{opacity:0; transform:translate3d(0,26px,0) scale(.965); filter:blur(16px);} 60%{filter:blur(3px);} to{opacity:1; transform:none; filter:blur(0);} }
+/* native entrance animations restart when .g-in is removed (=> flash); neutralise them in glass */
+body.theme-glass main > section{ animation:none !important; }
+body.theme-glass :is(#dash-view,#habits-view):not(.g-in) > *{ animation:none !important; }
+@keyframes gOut{ to{opacity:0; transform:translate3d(0,-10px,0) scale(.985); filter:blur(12px);} }
+body.theme-glass .g-out{ animation:gOut .2s ease-in both; pointer-events:none; }
+body.theme-glass .g-in > *, body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > *{ animation:gIn .75s cubic-bezier(.2,.8,.2,1) both !important; animation-delay:calc(var(--gi,0)*35ms) !important; will-change:transform,opacity,filter; }
+@media (prefers-reduced-motion:reduce){ body.theme-glass .g-in > *, body.theme-glass .g-in :is(#ivPort,#ivFut) > *{ animation:none !important; } body.theme-glass.theme-neon #glassBg::before,body.theme-glass.theme-neon #glassBg::after,body.theme-glass.theme-neon #glassBg i{ animation:none; } }
+body.theme-glass .g-in > :nth-child(1), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(1){ --gi:0; }
+body.theme-glass .g-in > :nth-child(2), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(2){ --gi:1; }
+body.theme-glass .g-in > :nth-child(3), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(3){ --gi:2; }
+body.theme-glass .g-in > :nth-child(4), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(4){ --gi:3; }
+body.theme-glass .g-in > :nth-child(5), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(5){ --gi:4; }
+body.theme-glass .g-in > :nth-child(6), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(6){ --gi:5; }
+body.theme-glass .g-in > :nth-child(7), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(7){ --gi:6; }
+body.theme-glass .g-in > :nth-child(8), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(8){ --gi:7; }
+body.theme-glass .g-in > :nth-child(9), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(9){ --gi:8; }
+body.theme-glass .g-in > :nth-child(10), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(10){ --gi:9; }
+body.theme-glass .g-in > :nth-child(11), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(11){ --gi:10; }
+body.theme-glass .g-in > :nth-child(12), body.theme-glass .g-in :is(#ivPort,#ivFut,#sub-overview,#sub-ops,#sub-report,#sub-plan) > :nth-child(12){ --gi:11; }
 </style>
 </head>
-<body class="theme-neon">
+<body class="theme-neon theme-glass">
+<div id="glassBg" aria-hidden="true"><i></i></div><canvas id="glassFx" aria-hidden="true"></canvas>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="auroraFill" x1="10%" y1="0%" x2="90%" y2="100%"><stop offset="0%" style="stop-color:color-mix(in srgb,var(--red-bright) 45%,#fff)"/><stop offset="55%" style="stop-color:var(--red-bright)"/><stop offset="100%" style="stop-color:var(--gold)"/></linearGradient></defs></svg>
 <style id="featCss">
@@ -1931,6 +2196,31 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
         </div>
       </div>
 
+      <div class="home-hero" id="homeHero">
+        <div class="hh-sheen"></div>
+        <div class="hh-top"><span class="hh-lbl">Общий капитал</span><button class="hh-eye" id="hhEye" type="button" aria-label="Скрыть сумму">👁</button></div>
+        <div class="hh-big mono" id="hhBig">0</div>
+        <div class="hh-delta" id="hhDelta"></div>
+        <div class="hh-split" id="hhSplit"></div>
+        <div class="hh-leg" id="hhLeg"></div>
+        <div class="hh-tiles">
+          <button class="hh-tile" id="hhHabits" type="button">
+            <svg class="hh-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" class="rb"/><circle cx="22" cy="22" r="18" class="rf" id="hhRingF" pathLength="100" stroke-dasharray="0 100"/></svg>
+            <span class="hh-tv" id="hhHabitsV">0/0</span><span class="hh-tl">Триггеры</span>
+          </button>
+          <button class="hh-tile" id="hhStreak" type="button"><span class="hh-ic">🔥</span><span class="hh-tv" id="hhStreakV">0</span><span class="hh-tl">дней подряд</span></button>
+          <button class="hh-tile" id="hhEvents" type="button"><span class="hh-ic">🗓️</span><span class="hh-tv" id="hhEventsV">0</span><span class="hh-tl">событий</span></button>
+        </div>
+      </div>
+
+      <div class="hg" id="homeGrid">
+        <button class="dash-card hg-t hg-wide" id="hgBal" type="button"><div class="hg-l"><span class="hg-k">Баланс</span><span class="hg-v mono" id="hgBalV">—</span></div><span class="hg-pill" id="hgBalD"></span></button>
+        <button class="dash-card hg-t" id="hgInv" type="button"><span class="hg-k">📈 Инвест</span><span class="hg-v mono" id="hgInvV">—</span><span class="hg-s" id="hgInvS"></span></button>
+        <button class="dash-card hg-t" id="hgHab" type="button"><span class="hg-k">⚡ Триггеры</span><span class="hg-v" id="hgHabV">0/0</span><span class="hg-bar"><i id="hgHabB" style="width:0%"></i></span></button>
+        <button class="dash-card hg-t" id="hgPlan" type="button"><span class="hg-k">🗓️ Планер</span><span class="hg-v" id="hgPlanV">0</span><span class="hg-s" id="hgPlanS"></span></button>
+        <button class="dash-card hg-t" id="hgChal" type="button"><span class="hg-k">🚀 Челленджи</span><span class="hg-v" id="hgChalV">0</span><span class="hg-bar"><i id="hgChalB" style="width:0%"></i></span></button>
+      </div>
+
       <button class="streak-chip" id="streakChipBtn">
         <span class="flame">🔥</span>
         <span class="streak-num mono" id="streakChipNum">0</span>
@@ -1972,6 +2262,14 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
         </button>
       </div>
 
+      <button class="dash-card w-invest" id="widgetInvest" type="button">
+        <div class="wi-top"><span class="wi-title">Крипто-портфель</span><span class="wi-ic">📈</span></div>
+        <div class="wi-big mono" id="wiBig">—</div>
+        <div class="wi-sub" id="wiSub"></div>
+        <div class="wi-bar" id="wiBar"></div>
+        <div class="wi-legend" id="wiLeg"></div>
+      </button>
+
       <div class="dash-grid2">
         <div class="dash-card balance-card">
           <div class="bc-top">
@@ -2008,14 +2306,6 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
         <div class="week-hint" id="weekHint">Не прерывай серию. Ты на верном пути!</div>
       </div>
 
-      <div class="quick-actions">
-        <button class="qa-btn" data-qa="newgoal"><span class="qa-ic">+</span><span>Новая цель</span></button>
-        <button class="qa-btn" data-qa="triggers"><span class="qa-ic">⚡</span><span>Триггеры</span></button>
-        <button class="qa-btn" data-qa="journal"><span class="qa-ic">📖</span><span>Дневник</span></button>
-        <button class="qa-btn" data-qa="analytics"><span class="qa-ic">📊</span><span>Аналитика</span></button>
-        <button class="qa-btn" data-qa="more"><span class="qa-ic">⋯</span><span>Ещё</span></button>
-      </div>
-
       <div class="dash-card">
         <div class="dash-section-head">
           <span class="sec-label" style="margin-bottom:0;">Достижения за сегодня</span>
@@ -2046,8 +2336,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     <!-- HABITS VIEW -->
     <section id="habits-view" hidden>
       <div class="view-head">
-        <h2>Ежедневные триггеры</h2>
-        <p>Держи дисциплину — счёт ведётся каждый день.</p>
+        <h2>Триггеры</h2>
       </div>
       <div class="habits-toolbar">
         <button class="toolbar-icon-btn" id="openReorderBtn" title="Изменить порядок">↕</button>
@@ -2250,7 +2539,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
 
     <!-- CHALLENGES PANEL -->
     <div class="panel-overlay" id="challengesPanel">
-      <div class="panel-header"><button class="panel-close" data-close-panel="challengesPanel">×</button><span class="ptitle">Челленджи</span></div>
+      <div class="panel-header"><button class="panel-close" data-close-panel="challengesPanel">×</button><span class="ptitle">Челленджи</span><button class="chal-new" id="chalNewBtn" type="button">+ Новый</button></div>
       <div class="panel-body">
         <div class="habit-add-card" id="challengeAddCard">
           <div class="add-row">
@@ -2404,8 +2693,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     <section id="money-view" hidden>
       <div class="view-head vh-row">
         <div>
-          <h2>Движение денег</h2>
-          <p>Счета, операции, отчёты и цели — в одном месте.</p>
+          <h2>Деньги</h2>
         </div>
         <button type="button" class="icon-circle" id="openFinSettingsBtn" title="Настройки финансов" aria-label="Настройки финансов">⚙</button>
       </div>
@@ -2609,7 +2897,8 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
         <div class="settings-section">
           <div class="sec-label">Тема оформления</div>
           <div class="theme-btns" id="themeBtnsWrap">
-            <button type="button" class="active" data-theme="neon"><span class="theme-swatch" style="background:linear-gradient(135deg,#FF4A3F,#FF9A6A)"></span>Неон</button>
+            <button type="button" class="active" data-theme="glass"><span class="theme-swatch" style="background:linear-gradient(135deg,#ffffff55,#ff3b30aa)"></span>Glass</button>
+            <button type="button" data-theme="neon"><span class="theme-swatch" style="background:linear-gradient(135deg,#FF4A3F,#FF9A6A)"></span>Неон</button>
             <button type="button" data-theme="cartel"><span class="theme-swatch" style="background:linear-gradient(135deg,#7BE8CD,#F5A99B)"></span>Аврора</button>
             <button type="button" data-theme="classic"><span class="theme-swatch" style="background:#FF5A45"></span>Классика</button>
             <button type="button" data-theme="calm"><span class="theme-swatch" style="background:#4FA173"></span>Спокойная</button>
@@ -2856,6 +3145,34 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     </button>
   </nav>
 
+  <div class="iv-modal" id="ivModal" aria-hidden="true"><div class="ivm-bg" id="ivmBg"></div>
+    <div class="ivm-card" role="dialog" aria-label="Крипто-портфель">
+      <div class="ivm-head"><span class="ivm-title">Крипто</span><button class="ivm-x" id="ivmX" type="button" aria-label="Закрыть">×</button></div>
+      <div class="ivm-seg" id="ivmSeg"><button type="button" class="on" data-ivm="port">Портфель</button><button type="button" data-ivm="fut">Фьючерсы</button></div>
+      <div class="ivm-body" id="ivmBody"></div>
+      <button class="ivm-open" id="ivmOpen" type="button">Открыть вкладку «Инвест» →</button>
+    </div></div>
+  <div class="cw" id="cardWallet" aria-hidden="true">
+    <div class="cw-bg" id="cwBg"></div>
+    <button class="cw-x" id="cwX" type="button" aria-label="Закрыть">×</button>
+    <div class="cw-stage" id="cwStage"></div>
+    <div class="cw-info" id="cwInfo">
+      <div class="cw-dots" id="cwDots"></div>
+      <div class="cw-name2" id="cwName"></div>
+      <div class="cw-bal mono" id="cwBal"></div>
+      <div class="cw-io"><div><span>Доходы</span><b class="up" id="cwInc"></b></div><div><span>Расходы</span><b class="dn" id="cwExp"></b></div></div>
+      <button class="cw-ok" id="cwOk" type="button">Показать операции</button>
+      <div class="cw-hint">свайпай карты ← →</div>
+    </div>
+  </div>
+  <div class="cp" id="colorPicker" aria-hidden="true"><div class="cp-bg" id="cpBg"></div>
+    <div class="cp-card" role="dialog" aria-label="Выбор цвета">
+      <div class="cp-head"><span class="cp-prev" id="cpPrev"></span><input class="cp-hex" id="cpHex" type="text" maxlength="7" spellcheck="false" autocomplete="off" value="#FF5A45"><button class="cp-ok" id="cpOk" type="button">Готово</button></div>
+      <div class="cp-sv" id="cpSv"><i class="cp-th" id="cpTh"></i></div>
+      <input class="cp-hue" id="cpHue" type="range" min="0" max="360" step="1" value="0" aria-label="Оттенок">
+      <div class="cp-lbl">Быстрый выбор</div>
+      <div class="cp-pre" id="cpPre"></div>
+    </div></div>
   <div class="qa-sheet-overlay" id="qaSheetOverlay"></div>
   <div class="qa-sheet" id="qaSheet">
     <div class="qa-sheet-handle"></div>
@@ -2950,7 +3267,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   let recurring = [];
   let rates = Object.assign({}, DEFAULT_RATES);
   let currency = 'UAH';
-  let theme = 'neon';
+  let theme = 'glass';
   let customThemes = [];
   let themeOverrides = {};
   let txType = 'income';
@@ -3051,8 +3368,9 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     });
   }
   function applyTheme(){
-    document.body.classList.remove('theme-classic','theme-neon');
-    if(theme==='neon'){ clearCustomThemeOverrides(); document.body.classList.remove('theme-calm'); document.body.classList.add('theme-neon'); }
+    document.body.classList.remove('theme-classic','theme-neon','theme-glass');
+    if(theme==='glass'){ clearCustomThemeOverrides(); document.body.classList.remove('theme-calm'); document.body.classList.add('theme-neon','theme-glass'); }
+    else if(theme==='neon'){ clearCustomThemeOverrides(); document.body.classList.remove('theme-calm'); document.body.classList.add('theme-neon'); }
     else if(theme==='cartel'){ clearCustomThemeOverrides(); document.body.classList.remove('theme-calm'); }
     else if(theme==='classic'){ clearCustomThemeOverrides(); document.body.classList.remove('theme-calm'); document.body.classList.add('theme-classic'); }
     else if(theme==='calm'){ clearCustomThemeOverrides(); document.body.classList.add('theme-calm'); }
@@ -3065,6 +3383,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   function renderThemeButtons(){
     const wrap = document.getElementById('themeBtnsWrap');
     const presetHtml = `
+      <button type="button" data-theme="glass"><span class="theme-swatch" style="background:linear-gradient(135deg,#ffffff55,#ff3b30aa)"></span>Glass</button>
       <button type="button" data-theme="neon"><span class="theme-swatch" style="background:linear-gradient(135deg,#FF4A3F,#FF9A6A)"></span>Неон</button>
       <button type="button" data-theme="cartel"><span class="theme-swatch" style="background:linear-gradient(135deg,#7BE8CD,#F5A99B)"></span>Аврора</button>
       <button type="button" data-theme="classic"><span class="theme-swatch" style="background:#FF5A45"></span>Классика</button>
@@ -3167,7 +3486,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   function lsGetV(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
   function lsGetT(k){ try{ return +(localStorage.getItem('kartel_ts:'+k)||0); }catch(e){ return 0; } }
   function lsPut(k,v,t){ try{ localStorage.setItem(k,v); localStorage.setItem('kartel_ts:'+k, String(t)); return true; }catch(e){ return false; } }
-  function validJson(k,v){ if(v==null) return false; if(k==='avatarPhoto'||k==='recapDesign'||k==='haptics'||k==='themeMig') return true; try{ JSON.parse(v); return true; }catch(e){ return false; } }
+  function validJson(k,v){ if(v==null) return false; if(k==='avatarPhoto'||k==='recapDesign'||k==='haptics'||k==='themeMig'||k==='themeMig2') return true; try{ JSON.parse(v); return true; }catch(e){ return false; } }
   const cGet = k => new Promise(res=>{ let done=false; const to=setTimeout(()=>{ if(!done){ done=true; res({err:true}); } },8000);
     try{ CS.getItem(k,(err,v)=>{ if(done) return; done=true; clearTimeout(to); res(err?{err:true}:{v:v||null}); }); }catch(e){ if(!done){ done=true; clearTimeout(to); res({err:true}); } } });
   const cSet = (k,v) => new Promise(res=>{ let done=false; const to=setTimeout(()=>{ if(!done){ done=true; res(false); } },10000);
@@ -3263,11 +3582,11 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       const parsed = s ? JSON.parse(s) : {};
       currency = parsed.currency || 'UAH';
       if(currency==='RUB') currency='UAH';
-      theme = parsed.theme || 'neon';
+      theme = parsed.theme || 'glass';
       profileName = parsed.profileName || 'Картель';
-    }catch(e){ currency='UAH'; theme='neon'; profileName='Картель'; }
+    }catch(e){ currency='UAH'; theme='glass'; profileName='Картель'; }
     // one-time migration: Neon becomes the base theme for everyone
-    try{ const mig = await storageGet('themeMig'); if(!mig){ theme='neon'; await storageSet('themeMig','1'); await saveSettings(); } }catch(e){}
+    try{ const mig = await storageGet('themeMig2'); if(!mig){ theme='glass'; await storageSet('themeMig2','1'); await saveSettings(); } }catch(e){}
 
     if(accounts.length===0){ accounts.push({ id: uid(), name: 'Основной' }); saveAccounts(); }
     let migrated=false;
@@ -3329,7 +3648,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     size(); window.addEventListener('resize',size);
     const N=54, P=[];
     function mk(init){ return {x:Math.random()*W, y:init?Math.random()*H:H+10, v:18+Math.random()*52, r:.5+Math.random()*1.7,
-      ph:Math.random()*6.28, f:.6+Math.random()*1.6, a:.25+Math.random()*.6, hue:Math.random()}; }
+      ph:Math.random()*6.28, f:.6+Math.random()*1.6, a:.4+Math.random()*.6, hue:Math.random()}; }
     for(let i=0;i<N;i++) P.push(mk(true));
     let last=t0;
     function frame(now){
@@ -3873,6 +4192,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       document.querySelectorAll('.nav-btn[data-tab]').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       const tab = btn.dataset.tab;
+      const run = ()=>{
       const goMoney = tab==='money';
       document.getElementById('dash-view').hidden = tab!=='dash';
       document.getElementById('habits-view').hidden = tab!=='habits';
@@ -3891,7 +4211,86 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       if(tab==='settings'){
         renderSettings();
       }
+      };
+      glassSwitch(run, tab);
     });
+  });
+  // ---- Glass motion: blur-out the old view, staggered blur-in for the new one
+
+  (function glassSparks(){
+    const cv=document.getElementById('glassFx'); if(!cv) return;
+    const cx=cv.getContext('2d'); let W=0,H=0,P=[],raf=0,dpr=Math.min(window.devicePixelRatio||1,2);
+    const mk=(init)=>({x:Math.random()*W,y:init?Math.random()*H:H+10,r:.6+Math.random()*1.7,vy:.15+Math.random()*.5,vx:(Math.random()-.5)*.25,a:.4+Math.random()*.6,ph:Math.random()*6.28,s:Math.random()<.7?(Math.random()<.5?0:1):2});
+    const SP=[8,28,295].map(h=>{ const c=document.createElement('canvas'); c.width=c.height=64; const x=c.getContext('2d'); const g=x.createRadialGradient(32,32,0,32,32,32);
+      g.addColorStop(0,'hsla('+h+',100%,72%,1)'); g.addColorStop(.25,'hsla('+h+',100%,58%,.35)'); g.addColorStop(1,'hsla('+h+',100%,50%,0)'); x.fillStyle=g; x.fillRect(0,0,64,64); return c; });
+    function size(){ W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); const n=Math.round(Math.min(60,W*H/16000)); P=Array.from({length:n},()=>mk(true)); }
+    function frame(t){
+      raf=requestAnimationFrame(frame);
+      if(!document.body.classList.contains('theme-glass')||document.hidden) return;
+      cx.clearRect(0,0,W,H); cx.globalCompositeOperation='lighter';
+      for(const p of P){
+        p.y-=p.vy; p.x+=p.vx+Math.sin(t/1800+p.ph)*.15;
+        if(p.y<-10){ Object.assign(p,mk(false)); }
+        const tw=.55+.45*Math.sin(t/500+p.ph); cx.globalAlpha=Math.max(0,Math.min(1,p.a*tw*Math.min(1,(H-p.y)/120,p.y/120+.2)));
+        const d=p.r*12; cx.drawImage(SP[p.s],p.x-d/2,p.y-d/2,d,d);
+      }
+      cx.globalAlpha=1;
+    }
+    size(); addEventListener('resize',size);
+    if(!matchMedia('(prefers-reduced-motion:reduce)').matches) raf=requestAnimationFrame(frame);
+  })();
+  // ---------- swipe between tabs ----------
+  (function swipeTabs(){
+    const main=document.querySelector('main'); if(!main) return;
+    let st=null;
+    const tabs=()=>[...document.querySelectorAll('.nav-btn[data-tab]')].filter(b=>b.offsetParent!==null).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);
+    const blocked=t=>{
+      if(!t||!t.closest) return true;
+      if(document.querySelector('.panel-overlay.show,.qa-sheet.show,.qa-sheet.open,.modal.show,.confirm-overlay.show')) return true;
+      if(t.closest('input,textarea,select,canvas,svg,[contenteditable],.iv-chart,[id^="ivA"],.subtabs,.iv-ptabs,.week-strip,[data-noswipe]')) return true;
+      for(let e=t;e&&e!==main&&e!==document.body;e=e.parentElement){ const o=getComputedStyle(e).overflowX; if((o==='auto'||o==='scroll')&&e.scrollWidth>e.clientWidth+4) return true; }
+      return false;
+    };
+    const cur=()=>[...main.querySelectorAll(':scope > section')].find(x=>!x.hidden);
+    main.addEventListener('touchstart',e=>{
+      if(e.touches.length!==1||blocked(e.target)){ st=null; return; }
+      const t=e.touches[0]; st={x:t.clientX,y:t.clientY,t:performance.now(),lock:0,el:cur(),dx:0};
+    },{passive:true});
+    main.addEventListener('touchmove',e=>{
+      if(!st||!st.el) return; const t=e.touches[0], dx=t.clientX-st.x, dy=t.clientY-st.y;
+      if(!st.lock){ if(Math.abs(dx)<10&&Math.abs(dy)<10) return; st.lock=(Math.abs(dx)>Math.abs(dy)*1.5)?1:-1; if(st.lock===1){ st.el.style.transition='none'; st.el.style.willChange='transform,opacity'; } }
+      if(st.lock!==1) return;
+      st.dx=dx;
+      const list=tabs(), i=list.findIndex(b=>b.classList.contains('active')), has=dx<0?i<list.length-1:i>0;
+      const k=has?0.55:0.18; st.el.style.transform='translate3d('+(dx*k).toFixed(1)+'px,0,0)'; st.el.style.opacity=String(Math.max(.35,1-Math.abs(dx)/(has?420:900)));
+    },{passive:true});
+    function end(){
+      if(!st) return; const s=st; st=null; if(s.lock!==1||!s.el) return;
+      const el=s.el, dt=Math.max(1,performance.now()-s.t), v=Math.abs(s.dx)/dt;
+      const list=tabs(), i=list.findIndex(b=>b.classList.contains('active')), n=s.dx<0?i+1:i-1;
+      const go=(Math.abs(s.dx)>70||(v>.5&&Math.abs(s.dx)>30)) && n>=0 && n<list.length && i>=0;
+      el.style.transition='transform .28s cubic-bezier(.2,.9,.3,1), opacity .28s ease';
+      if(go){ el.style.transform=''; el.style.opacity=''; el.style.transition=''; el.style.willChange=''; try{ window.Telegram.WebApp.HapticFeedback.selectionChanged(); }catch(e){} list[n].click(); }
+      else { el.style.transform=''; el.style.opacity=''; setTimeout(()=>{ el.style.transition=''; el.style.willChange=''; },300); }
+    }
+    main.addEventListener('touchend',end,{passive:true}); main.addEventListener('touchcancel',end,{passive:true});
+  })();
+  let glassBusy = false;
+  function glassIn(el){ if(!el) return; el.classList.remove('g-in'); void el.offsetWidth; el.classList.add('g-in'); clearTimeout(el._gt); el._gt = setTimeout(()=>el.classList.remove('g-in'), 1700); }
+  function glassSwitch(run, tab){
+    const nu = document.getElementById(tab+'-view');
+    run();
+    if(document.body.classList.contains('theme-glass') && nu) glassIn(nu);
+  }
+  document.addEventListener('click', e=>{
+    if(!document.body.classList.contains('theme-glass')) return;
+    const st = e.target.closest('.subtab, [data-ivptab], [data-ivper]'); if(!st) return;
+    setTimeout(()=>{
+      let t = null;
+      if(st.dataset.sub) t = document.getElementById('sub-'+st.dataset.sub);
+      else if(st.dataset.ivsub) t = document.getElementById(st.dataset.ivsub==='port'?'ivPort':'ivFut');
+      if(t) glassIn(t);
+    }, 30);
   });
   function goToTab(tab, sub){
     const btn = document.querySelector(`.nav-btn[data-tab="${tab==='dash'||tab==='habits'||tab==='planner'||tab==='invest'?tab:(sub==='settings'?'settings':'money')}"]`);
@@ -4376,15 +4775,52 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     b.classList.add('active');
     document.getElementById('qtyFieldsRow').hidden = newHabitType!=='quantity';
   });
+
+  // ---------- full colour picker ----------
+  const CP_PRESETS=['#FF3B30','#FF6B4A','#FF9500','#FFB84D','#FFD60A','#F2D184','#C6E03A','#9BE48F','#34C759','#2EE59D','#6FE3C6','#00C7BE','#7FD6E8','#4AA3FF','#007AFF','#8FB8FF','#5E5CE6','#8A5CF5','#C7A6FF','#AF52DE','#F08FB0','#FF2D55','#EC5F9C','#F5A99B','#FFB98A','#A2845E','#8AA7A1','#6E5654','#FFFFFF','#2B2F35'];
+  let cpHsv=[0,1,1], cpCb=null, cpDone=null;
+  function cpToHex(h,sat,v){ const f=n=>{ const k=(n+h/60)%6; const c=v-v*sat*Math.max(0,Math.min(k,4-k,1)); return Math.round(c*255).toString(16).padStart(2,'0'); }; return ('#'+f(5)+f(3)+f(1)).toUpperCase(); }
+  function cpFromHex(hex){ let m=/^#?([0-9a-f]{6})$/i.exec(String(hex||'').trim()); if(!m){ const m3=/^#?([0-9a-f]{3})$/i.exec(String(hex||'').trim()); if(!m3) return null; m=[0,m3[1].split('').map(c=>c+c).join('')]; }
+    const n=parseInt(m[1],16), r=(n>>16&255)/255, g=(n>>8&255)/255, b=(n&255)/255, mx=Math.max(r,g,b), mn=Math.min(r,g,b), d=mx-mn; let h=0;
+    if(d){ if(mx===r) h=((g-b)/d)%6; else if(mx===g) h=(b-r)/d+2; else h=(r-g)/d+4; h*=60; if(h<0) h+=360; } return [h,mx?d/mx:0,mx]; }
+  function cpRender(fromInput){
+    const hex=cpToHex(cpHsv[0],cpHsv[1],cpHsv[2]); const sv=document.getElementById('cpSv');
+    sv.style.setProperty('--h',cpHsv[0]); const th=document.getElementById('cpTh'); th.style.left=(cpHsv[1]*100)+'%'; th.style.top=((1-cpHsv[2])*100)+'%';
+    document.getElementById('cpPrev').style.background=hex; document.getElementById('cpHue').value=Math.round(cpHsv[0]);
+    if(!fromInput) document.getElementById('cpHex').value=hex; if(cpCb) cpCb(hex);
+  }
+  function openColorPicker(hex,onChange,onDone){
+    cpCb=onChange; cpDone=onDone; cpHsv=cpFromHex(hex)||[0,1,1];
+    const pre=document.getElementById('cpPre'); if(!pre.children.length) pre.innerHTML=CP_PRESETS.map(c=>`<i style="background:${c}" data-c="${c}"></i>`).join('');
+    const cp=document.getElementById('colorPicker'); cp.classList.add('show'); cp.setAttribute('aria-hidden','false'); cpRender();
+  }
+  function closeColorPicker(){ const cp=document.getElementById('colorPicker'); cp.classList.remove('show'); cp.setAttribute('aria-hidden','true'); const d=cpDone; cpCb=null; cpDone=null; if(d) d(); }
+  (function(){ const sv=document.getElementById('cpSv'); let drag=false;
+    const mv=e=>{ const r=sv.getBoundingClientRect(); cpHsv[1]=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); cpHsv[2]=1-Math.max(0,Math.min(1,(e.clientY-r.top)/r.height)); cpRender(); };
+    sv.addEventListener('pointerdown',e=>{ drag=true; try{ sv.setPointerCapture(e.pointerId); }catch(_){} mv(e); }); sv.addEventListener('pointermove',e=>{ if(drag) mv(e); });
+    const up=()=>{ drag=false; }; sv.addEventListener('pointerup',up); sv.addEventListener('pointercancel',up);
+    document.getElementById('cpHue').addEventListener('input',e=>{ cpHsv[0]=+e.target.value; cpRender(); });
+    document.getElementById('cpHex').addEventListener('input',e=>{ const v=cpFromHex(e.target.value); if(v){ cpHsv=v; cpRender(true); } });
+    document.getElementById('cpPre').addEventListener('click',e=>{ const i=e.target.closest('[data-c]'); if(!i) return; cpHsv=cpFromHex(i.dataset.c); cpRender(); haptic('select'); });
+    document.getElementById('cpOk').addEventListener('click',closeColorPicker); document.getElementById('cpBg').addEventListener('click',closeColorPicker);
+  })();
+  function cpRowHtml(list,cur,attr){
+    const inList=list.some(c=>String(c).toLowerCase()===String(cur).toLowerCase());
+    return list.map(c=>`<span class="cs ${c===cur?'sel':''}" style="background:${c}" data-${attr}="${c}"></span>`).join('')+(!inList&&cur?`<span class="cs sel" style="background:${cur}" data-${attr}="${cur}"></span>`:'')+'<span class="cs cs-add" data-cpadd="1" title="Свой цвет"></span>';
+  }
+  function cpAttach(rowId,getCur,setCur,reinit){
+    document.getElementById(rowId).addEventListener('click',e=>{ if(!e.target.closest('[data-cpadd]')) return; haptic('select'); openColorPicker(getCur(),hex=>{ setCur(hex); },()=>{ reinit(); }); });
+  }
   function initHabitColorSwatches(){
     const wrap = document.getElementById('habitColorRow');
-    wrap.innerHTML = HABIT_COLORS.map(c=>`<span class="cs ${c===newHabitColor?'sel':''}" style="background:${c}" data-color="${c}"></span>`).join('');
+    wrap.innerHTML = cpRowHtml(HABIT_COLORS,newHabitColor,'color');
   }
   document.getElementById('habitColorRow').addEventListener('click', e=>{
     const s = e.target.closest('[data-color]'); if(!s) return;
     newHabitColor = s.dataset.color;
     document.querySelectorAll('#habitColorRow .cs').forEach(x=>x.classList.toggle('sel', x.dataset.color===newHabitColor));
   });
+  cpAttach('habitColorRow',()=>newHabitColor,h=>{ newHabitColor=h; },initHabitColorSwatches);
   function rebuildHabitGroupSelect(){
     const sel = document.getElementById('habitGroupSelect');
     const cur = sel.value;
@@ -4518,9 +4954,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     }
     if(colorDot){
       const g = habitGroups.find(g=>g.id===colorDot.dataset.gcolor);
-      const idx = HABIT_COLORS.indexOf(g.color);
-      g.color = HABIT_COLORS[(idx+1)%HABIT_COLORS.length];
-      saveHabitGroups(); renderGroupsPanel(); renderHabits();
+      openColorPicker(g.color||HABIT_COLORS[0],hex=>{ g.color=hex; colorDot.style.background=hex; },()=>{ saveHabitGroups(); renderGroupsPanel(); renderHabits(); });
     }
   });
   document.getElementById('groupsList').addEventListener('change', e=>{
@@ -4630,8 +5064,9 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     return 'ended';
   }
   function initChalColorSwatches(){
-    document.getElementById('chalColorRow').innerHTML = HABIT_COLORS.map(c=>`<span class="cs ${c===newChallengeColor?'sel':''}" style="background:${c}" data-chalcolor="${c}"></span>`).join('');
+    document.getElementById('chalColorRow').innerHTML = cpRowHtml(HABIT_COLORS,newChallengeColor,'chalcolor');
   }
+  document.getElementById('chalNewBtn').addEventListener('click',()=>{ chalFormOpen=!chalFormOpen; renderChallengesPanel(); });
   document.getElementById('openChallengesBtn').addEventListener('click', ()=>{ renderChallengesPanel(); openPanel('challengesPanel'); });
   document.getElementById('chalEmojiTrigger').addEventListener('click', ()=>{
     openEmojiPicker(e=>{
@@ -4653,6 +5088,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     newChallengeColor = s.dataset.chalcolor;
     document.querySelectorAll('#chalColorRow .cs').forEach(x=>x.classList.toggle('sel', x.dataset.chalcolor===newChallengeColor));
   });
+  cpAttach('chalColorRow',()=>newChallengeColor,h=>{ newChallengeColor=h; },initChalColorSwatches);
   document.getElementById('addChallengeBtn').addEventListener('click', ()=>{
     const nameInp = document.getElementById('chalNameInput'); const name = nameInp.value.trim();
     if(!name) return;
@@ -4665,54 +5101,52 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     saveChallenges(); renderChallengesPanel();
     showToast('Челлендж начат!');
   });
-  function renderChallengesPanel(){
-    const wrap = document.getElementById('challengesList');
-    if(challenges.length===0){ wrap.innerHTML = '<div class="empty">Пока нет челленджей. Задай срок и начни первый выше.</div>'; return; }
-    const sorted = challenges.slice().sort((a,b)=> b.startDate.localeCompare(a.startDate));
-    wrap.innerHTML = sorted.map(c=>{
-      const status = challengeStatus(c);
-      const dayNum = Math.min(c.days, Math.max(1, Math.round((new Date(toDateStr(today)+'T00:00:00') - new Date(c.startDate+'T00:00:00'))/86400000)+1));
-      const doneCount = Object.values(c.log).filter(v=>v).length;
-      const pct = Math.round(doneCount/c.days*100);
-      const doneToday = !!c.log[toDateStr(today)];
-      const badge = status==='ended' ? (doneCount>=c.days?'<span class="chal-badge done">Завершён ✓</span>':'<span class="chal-badge">Окончен</span>') : (status==='upcoming' ? '<span class="chal-badge">Скоро</span>' : '');
-      const expanded = expandedChallenge===c.id;
-      return `<div class="chal-card ${status==='ended'?'ended':''}" style="--cc:${c.color};" data-chalcard="${c.id}">
-        <div class="chal-top">
-          <span class="chal-emoji">${c.emoji}</span>
-          <span class="chal-name">${c.name}</span>
-          ${badge}
-        </div>
-        <div class="chal-sub">${status==='upcoming' ? `Начнётся ${fmtDateShort(c.startDate)}` : `День ${dayNum} из ${c.days} · выполнено ${doneCount}/${c.days} (${pct}%)`}</div>
-        <div class="chal-bar-track"><div class="chal-bar-fill" style="width:${pct}%"></div></div>
-        <div class="chal-actions">
-          ${status==='active' ? `<button class="chal-check-btn ${doneToday?'done':''}" data-chalcheck="${c.id}">${doneToday?'✓ Сделано сегодня':'Отметить сегодня'}</button>` : ''}
-          <button class="chal-icon-btn" data-chalexpand="${c.id}">${expanded?'Скрыть дни ▲':'Все дни ▼'}</button>
-          <button class="chal-icon-btn" data-chaldel="${c.id}" style="color:var(--red-bright);">🗑</button>
-        </div>
-        ${expanded ? renderChallengeDayList(c) : ''}
-      </div>`;
-    }).join('');
+  let chalFormOpen=false, chalLastLen=-1;
+  function chalStreaks(c){
+    let best=0,run=0,cur=0; const todayS=toDateStr(today);
+    for(let i=0;i<c.days;i++){ const d=new Date(c.startDate+'T00:00:00'); d.setDate(d.getDate()+i); const ds=toDateStr(d); if(ds>todayS) break;
+      if(c.log[ds]){ run++; if(run>best) best=run; } else if(ds<todayS){ run=0; } }
+    for(let i=0;i<c.days;i++){ const d=new Date(todayS+'T00:00:00'); d.setDate(d.getDate()-i); const ds=toDateStr(d); if(ds<c.startDate) break; if(c.log[ds]) cur++; else if(i>0) break; }
+    return {cur,best};
   }
-  function renderChallengeDayList(c){
-    let rows = '';
-    for(let i=0;i<c.days;i++){
-      const d = new Date(c.startDate+'T00:00:00'); d.setDate(d.getDate()+i);
-      const dstr = toDateStr(d);
-      const isFuture = d > today;
-      const done = !!c.log[dstr];
-      const icon = isFuture ? '⏳' : (done ? '✅' : '❌');
-      rows += `<div class="timeline-row">
-        <div class="timeline-time">${d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'}).replace('.','')}</div>
-        <div class="timeline-track"><div class="timeline-line"></div><div class="timeline-dot" style="background:${done?c.color:'var(--line)'}"></div></div>
-        <div class="timeline-card" style="--tc:${c.color};">
-          <div class="timeline-card-status">${icon}</div>
-          <div class="timeline-card-title">День ${i+1}</div>
-          <div class="timeline-card-sub">${isFuture?'Ещё впереди':(done?'Выполнено':'Пропущено')}</div>
-        </div>
-      </div>`;
-    }
-    return `<div class="timeline" style="margin-top:14px;">${rows}</div>`;
+  function chalRing(pct,col,size,sw,txt){ return `<div class="chal-ring" style="width:${size}px;height:${size}px"><svg viewBox="0 0 44 44" width="${size}" height="${size}" style="transform:rotate(-90deg)"><circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="${sw}"/><circle cx="22" cy="22" r="18" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round" pathLength="100" stroke-dasharray="${Math.max(0,Math.min(100,pct))} 100" style="transition:stroke-dasharray .9s cubic-bezier(.2,.8,.2,1)"/></svg><span>${txt}</span></div>`; }
+  function renderChallengesPanel(){
+    const wrap = document.getElementById('challengesList'), tdS=toDateStr(today);
+    if(chalLastLen!==challenges.length){ chalFormOpen=false; chalLastLen=challenges.length; }
+    document.getElementById('challengeAddCard').hidden = challenges.length>0 && !chalFormOpen;
+    const info=c=>{ const status=challengeStatus(c); const doneCount=Object.values(c.log).filter(v=>v).length; const pct=Math.round(doneCount/c.days*100);
+      const dayNum=Math.min(c.days,Math.max(1,Math.round((new Date(tdS+'T00:00:00')-new Date(c.startDate+'T00:00:00'))/86400000)+1));
+      return {c,status,doneCount,pct,dayNum,doneToday:!!c.log[tdS],st:chalStreaks(c)}; };
+    const all=challenges.map(info), act=all.filter(x=>x.status==='active');
+    const doneTodayN=act.filter(x=>x.doneToday).length, bestS=all.length?Math.max(...all.map(x=>x.st.best)):0, avg=act.length?Math.round(act.reduce((q,x)=>q+x.pct,0)/act.length):0;
+    let h=`<div class="stat-grid">
+      <div class="stat-card"><div class="ic">${ICONS.habit}</div><div class="num">${act.length}</div><div class="lbl">Активные челленджи</div></div>
+      <div class="stat-card"><div class="ic">${ICONS.check}</div><div class="num">${doneTodayN}/${act.length}</div><div class="lbl">Выполнено сегодня</div></div>
+      <div class="stat-card"><div class="ic gold">${ICONS.trophy}</div><div class="num">${bestS}</div><div class="lbl">Лучшая серия</div></div>
+      <div class="stat-card"><div class="ic">${ICONS.pulse}</div><div class="num">${avg}%</div><div class="lbl">Средний прогресс</div></div></div>`;
+    if(!all.length){ wrap.innerHTML = h+'<div class="empty">Пока нет челленджей. Задай срок и начни первый выше.</div>'; return; }
+    const focus = act.find(x=>!x.doneToday) || act[0];
+    if(focus){ const f=focus, left=f.c.days-f.dayNum;
+      h+=`<div class="chal-hero" style="--cc:${f.c.color}"><div class="chal-hero-in">${chalRing(f.pct,'#fff',92,5,f.doneCount+'/'+f.c.days)}
+        <div class="chal-hero-t"><div class="chal-hero-k">СЕЙЧАС В ФОКУСЕ</div><div class="chal-hero-n">${f.c.emoji} ${f.c.name}</div><div class="chal-hero-s">${left>0?'Осталось '+left+' '+declOfDays(left):'Последний день'} · серия 🔥 ${f.st.cur}</div></div></div>
+        ${renderChallengeDayList(f.c)}<button class="chal-hero-btn ${f.doneToday?'done':''}" data-chalcheck="${f.c.id}" type="button">${f.doneToday?'✓ Сделано сегодня':'✓ Отметить сегодня'}</button></div>`; }
+    h+='<div class="sec-label" style="margin:16px 4px 8px">Все челленджи</div>';
+    h+=all.slice().sort((x,y)=>y.c.startDate.localeCompare(x.c.startDate)).map(x=>{ const c=x.c, expanded=expandedChallenge===c.id;
+      const badge = x.status==='ended' ? (x.doneCount>=c.days?'<span class="chal-chip ok">Завершён ✓</span>':'<span class="chal-chip">Окончен</span>') : x.status==='upcoming' ? `<span class="chal-chip">Скоро</span>` : `<button class="chal-chip ${x.doneToday?'ok':'go'}" data-chalcheck="${c.id}" type="button">${x.doneToday?'Сделано ✓':'Отметить'}</button>`;
+      return `<div class="dash-card chal-row ${x.status==='ended'?'ended':''}" style="--cc:${c.color}"><div class="chal-row-main"><button class="chal-row-l" data-chalexpand="${c.id}" type="button">${chalRing(x.pct,c.color,46,5,'')}
+        <span class="chal-row-t"><b>${c.emoji} ${c.name}</b><small>${x.status==='upcoming'?'Начнётся '+fmtDateShort(c.startDate):'День '+x.dayNum+' из '+c.days+' · '+x.pct+'%'}</small></span></button>${badge}</div>
+        ${expanded?`<div class="chal-row-more">${renderChallengeDayList(c)}<button class="chal-icon-btn" data-chaldel="${c.id}" style="color:var(--red-bright);margin-top:10px" type="button">🗑 Удалить</button></div>`:''}</div>`; }).join('');
+    wrap.innerHTML=h;
+  }
+  function renderChallengeDayList(c, onHero){
+    const tdS=toDateStr(today), st=new Date(c.startDate+'T00:00:00'); const K=c.days<=14?7:(c.days<=40?10:15);
+    let cells='', doneN=0, passed=0;
+    for(let i=0;i<c.days;i++){ const dt=new Date(st); dt.setDate(dt.getDate()+i); const ds=toDateStr(dt), done=!!c.log[ds], fut=ds>tdS, isT=ds===tdS;
+      if(!fut) passed++; if(done) doneN++;
+      cells+=`<i class="gc ${done?'on':(fut?'fut':'miss')}${isT?' td':''}" ${fut?'':`data-chalday="${c.id}|${ds}"`} title="${fmtDateShort(ds)}">${i+1}</i>`; }
+    const st2=chalStreaks(c), pct=passed?Math.round(doneN/passed*100):0;
+    return `<div class="chal-gridwrap"><div class="chal-grid" style="grid-template-columns:repeat(${K},1fr)">${cells}</div>
+      <div class="chal-gfoot">🔥 Серия ${st2.cur} · ${doneN} из ${passed} (${pct}%) · тап по дню</div></div>`;
   }
   let expandedChallenge = null;
   document.getElementById('challengesList').addEventListener('click', e=>{
@@ -4730,6 +5164,8 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       }
       saveChallenges(); renderChallengesPanel();
     }
+    const gd = e.target.closest('[data-chalday]');
+    if(gd){ const [cid,ds]=gd.dataset.chalday.split('|'); const c=challenges.find(x=>x.id===cid); if(c){ if(c.log[ds]) delete c.log[ds]; else c.log[ds]=true; saveChallenges(); renderChallengesPanel(); } return; }
     if(expand){ expandedChallenge = (expandedChallenge===expand.dataset.chalexpand) ? null : expand.dataset.chalexpand; renderChallengesPanel(); }
     if(del){
       const c = challenges.find(c=>c.id===del.dataset.chaldel);
@@ -4751,13 +5187,15 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   async function savePlannerEvents(){ try{ await storageSet('plannerEvents', JSON.stringify(plannerEvents)); }catch(e){ console.error(e); } }
 
   function initPlColorSwatches(){
-    document.getElementById('plColorRow').innerHTML = HABIT_COLORS.map(c=>`<span class="cs ${c===newPlannerColor?'sel':''}" style="background:${c}" data-plcolor="${c}"></span>`).join('');
+    document.getElementById('plColorRow').innerHTML = cpRowHtml(HABIT_COLORS,newPlannerColor,'plcolor');
   }
   document.getElementById('plColorRow').addEventListener('click', e=>{
     const s = e.target.closest('[data-plcolor]'); if(!s) return;
     newPlannerColor = s.dataset.plcolor;
     document.querySelectorAll('#plColorRow .cs').forEach(x=>x.classList.toggle('sel', x.dataset.plcolor===newPlannerColor));
   });
+
+  cpAttach('plColorRow',()=>newPlannerColor,h=>{ newPlannerColor=h; },initPlColorSwatches);
 
   function fmtTime12(t){
     if(!t) return '';
@@ -6258,18 +6696,84 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   document.getElementById('periodPrev').addEventListener('click', ()=>{ period.m--; if(period.m<0){ period.m=11; period.y--; } renderMoney(); });
   document.getElementById('periodNext').addEventListener('click', ()=>{ period.m++; if(period.m>11){ period.m=0; period.y++; } renderMoney(); });
 
+
+  // ---------- card wallet (account switcher) ----------
+  const CW_PAL=[['#ff4a3f','#7a1fa8'],['#1fa7a0','#14457a'],['#e0a53a','#4a2a0e'],['#3ac27a','#0f4a3a'],['#8a5cf5','#2a1466'],['#ec5f9c','#5a1442'],['#4aa3ff','#16306e']];
+  let cwList=[], cwPos=0, cwCur=0, cwDrag=null, cwOpen=false;
+  const cwLast4=id=>String(Math.abs(String(id).split('').reduce((a,c)=>(a*31+c.charCodeAt(0))%10000,7))).padStart(4,'0');
+  function cwData(){
+    const all=accounts.map(a=>a.id);
+    const calc=(ids)=>{ const s0=periodStartStr(), e0=periodEndStr(); let bal=0,inc=0,exp=0;
+      transactions.forEach(t=>{ if(!txTouchesAccount(t,ids)) return; bal+=txSignedAmountForAccounts(t,ids); if(t.date>=s0&&t.date<=e0){ if(t.type==='income') inc+=t.amount; else if(t.type==='expense') exp+=t.amount; } });
+      return {bal,inc,exp}; };
+    const L=[{id:'all',name:'Все счета',tag:'ВСЕ СЧЕТА',last:'••••',...calc(all)}];
+    accounts.forEach(a=>L.push({id:a.id,name:a.name||'Счёт',tag:a.currency||'',last:cwLast4(a.id),...calc([a.id])}));
+    return L;
+  }
+  function cwLayout(pos,anim){
+    const stage=document.getElementById('cwStage'); const W=stage.offsetWidth||320;
+    [...stage.children].forEach((el,i)=>{
+      const k=i-pos; let tx=0,ty=0,sc=1,rot=0,op=1,z=100-Math.round(Math.abs(k)*10);
+      if(k>=0){ ty=-Math.min(k,3.2)*20; sc=1-Math.min(k,3.2)*0.055; op=Math.max(0,1-k*0.22); }
+      else { const q=Math.max(k,-1.4); tx=q*W*1.25; rot=q*14; op=Math.max(0,1+k*0.75); z=100+Math.round(-k*10); }
+      el.style.transition=anim?'transform .55s cubic-bezier(.2,.9,.3,1.08), opacity .45s ease':'none';
+      el.style.transform=`translate3d(${tx.toFixed(1)}px,${ty.toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+      el.style.opacity=op.toFixed(3); el.style.zIndex=z; el.style.pointerEvents=(k>-0.5&&k<3.3)?'auto':'none';
+      el.style.setProperty('--sx',(50+((k<0?-k:k)*90)+(k<0?0:0)).toFixed(0)+'%');
+    });
+  }
+  function cwInfo(i,first){
+    const d=cwList[i]; if(!d) return; const f=v=>balanceHidden?'••••':fmtMoney(Math.round(v*100)/100);
+    const set=(id,t)=>{ const e=document.getElementById(id); e.textContent=t; e.classList.remove('sw'); void e.offsetWidth; if(!first) e.classList.add('sw'); };
+    set('cwName',d.name); set('cwBal',f(d.bal)); set('cwInc',(d.inc>0?'+':'')+f(d.inc).replace('-','')); set('cwExp',(d.exp>0?'−':'')+f(d.exp).replace('-',''));
+    document.getElementById('cwDots').innerHTML=cwList.map((x,j)=>`<i class="${j===i?'on':''}"></i>`).join('');
+  }
+  function cwGo(i,anim){ i=Math.max(0,Math.min(cwList.length-1,i)); const ch=i!==cwCur; cwCur=i; cwPos=i; cwLayout(cwPos,anim!==false); if(ch){ cwInfo(i); haptic('select'); } }
+  function cwBuild(startIdx){
+    cwList=cwData(); const stage=document.getElementById('cwStage');
+    stage.innerHTML=cwList.map((d,i)=>{ const g=i===0?CW_PAL[0]:CW_PAL[(i%(CW_PAL.length-1))+1]; const hide=balanceHidden;
+      return `<div class="cw-card" data-i="${i}" style="--g1:${g[0]};--g2:${g[1]}"><div class="cw-top"><span class="cw-logo">KARTEL</span><span class="cw-tag">${ivEsc(String(d.tag))}</span></div><div class="cw-chip"></div><div class="cw-num">•••• •••• •••• ${d.last}</div><div class="cw-bot"><span class="cw-cn">${ivEsc(d.name)}</span><span class="cw-brand">VIRTUAL</span></div></div>`; }).join('');
+    cwCur=startIdx; cwPos=startIdx;
+  }
+  function cwOpenAt(accId){
+    let idx=0; const probe=cwData(); idx=Math.max(0,probe.findIndex(x=>x.id===accId));
+    cwBuild(idx); cwOpen=true; const w=document.getElementById('cardWallet');
+    // start state: all cards low + transparent, then fly in with stagger
+    const stage=document.getElementById('cwStage'); [...stage.children].forEach(el=>{ el.style.transition='none'; el.style.opacity='0'; el.style.transform='translate3d(0,140px,0) scale(.85)'; });
+    w.classList.add('show'); w.setAttribute('aria-hidden','false'); cwInfo(idx,true);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ const kids=[...stage.children]; kids.forEach((el,i)=>{ el.style.transitionDelay=(Math.abs(i-idx)*70)+'ms'; }); cwLayout(cwPos,true); setTimeout(()=>kids.forEach(el=>el.style.transitionDelay=''),900); }));
+  }
+  function cwClose(apply){
+    if(!cwOpen) return; cwOpen=false; const d=cwList[cwCur]; const w=document.getElementById('cardWallet'); const stage=document.getElementById('cwStage');
+    [...stage.children].forEach((el,i)=>{ el.style.transition='transform .4s cubic-bezier(.5,0,.8,.4), opacity .3s ease'; el.style.transitionDelay=(Math.abs(i-cwCur)*30)+'ms'; el.style.opacity='0'; el.style.transform='translate3d(0,160px,0) scale(.88)'; });
+    w.classList.remove('show'); w.setAttribute('aria-hidden','true');
+    if(apply && d && d.id!==activeAccountFilter){ activeAccountFilter=d.id; const sel=document.getElementById('accountFilter'); if(sel) sel.value=d.id; if(d.id!=='all') document.getElementById('txAccount').value=d.id; renderMoney(); }
+  }
+  (function(){ const stage=document.getElementById('cwStage');
+    stage.addEventListener('pointerdown',e=>{ if(!cwOpen) return; cwDrag={x:e.clientX,t:performance.now(),moved:false,id:e.pointerId,p0:cwPos}; try{ stage.setPointerCapture(e.pointerId); }catch(_){} });
+    stage.addEventListener('pointermove',e=>{ if(!cwDrag) return; const dx=e.clientX-cwDrag.x; if(Math.abs(dx)>4) cwDrag.moved=true; if(!cwDrag.moved) return; const W=stage.offsetWidth||320;
+      let np=cwDrag.p0-dx/(W*0.9); const over=np<0?-np:(np>cwList.length-1?np-(cwList.length-1):0); if(over>0) np=np<0?-over*0.25:cwList.length-1+over*0.25; cwPos=np; cwLayout(cwPos,false); });
+    const end=e=>{ if(!cwDrag) return; const d=cwDrag; cwDrag=null; const dx=e.clientX-d.x, dt=Math.max(1,performance.now()-d.t), v=dx/dt;
+      if(!d.moved){ const c=e.target.closest('.cw-card'); if(c){ const i=+c.dataset.i; if(i===cwCur) cwClose(true); else cwGo(i); } return; }
+      let t=d.p0; if(dx<-50||v<-0.45) t=d.p0+1; else if(dx>50||v>0.45) t=d.p0-1; cwGo(Math.round(t)); };
+    stage.addEventListener('pointerup',end); stage.addEventListener('pointercancel',end);
+    document.getElementById('cwBg').addEventListener('click',()=>cwClose(true)); document.getElementById('cwX').addEventListener('click',()=>cwClose(false)); document.getElementById('cwOk').addEventListener('click',()=>cwClose(true));
+  })();
   function renderAccChips(){
     const wrap=document.getElementById('accChips'); if(!wrap) return;
     const bal=ids=>transactions.filter(t=>txTouchesAccount(t,ids)).reduce((s,t)=>s+txSignedAmountForAccounts(t,ids),0);
     const f=v=>balanceHidden?'••••':fmtMoney(Math.round(v*100)/100);
     const all=accounts.map(a=>a.id);
-    let html=`<button class="acc-chip${activeAccountFilter==='all'?' on':''}" data-acc="all"><span class="n">Все счета</span><span class="b">${f(bal(all))}</span></button>`;
-    html+=accounts.map(a=>`<button class="acc-chip${activeAccountFilter===a.id?' on':''}" data-acc="${a.id}"><span class="n">${(a.name||'').replace(/[<>&]/g,'')}</span><span class="b">${f(bal([a.id]))}</span></button>`).join('');
+    const cur = activeAccountFilter==='all' ? null : accounts.find(x=>x.id===activeAccountFilter);
+    const nm = cur ? (cur.name||'Счёт').replace(/[<>&]/g,'') : 'Все счета';
+    const val = cur ? bal([cur.id]) : bal(all);
+    const html=`<button class="dash-card acc-widget" data-acc="${cur?cur.id:'all'}" type="button"><span class="aw-stack"><i></i><i></i><i></i></span><span class="aw-t"><small>Счета · ${accounts.length}</small><b>${nm}</b></span><span class="aw-v mono">${f(val)}</span><span class="aw-go">›</span></button>`;
     wrap.innerHTML=html;
     const on=wrap.querySelector('.on'); if(on && wrap.scrollWidth>wrap.clientWidth){ const l=on.offsetLeft, r=l+on.offsetWidth; if(l<wrap.scrollLeft) wrap.scrollLeft=Math.max(0,l-12); else if(r>wrap.scrollLeft+wrap.clientWidth) wrap.scrollLeft=r-wrap.clientWidth+12; }
   }
   document.getElementById('accChips').addEventListener('click', e=>{
     const b=e.target.closest('[data-acc]'); if(!b) return;
+    if(accounts.length>0){ haptic('select'); cwOpenAt(b.dataset.acc); return; }
     activeAccountFilter=b.dataset.acc; const sel=document.getElementById('accountFilter'); sel.value=activeAccountFilter;
     if(activeAccountFilter!=='all') document.getElementById('txAccount').value=activeAccountFilter;
     haptic('select'); renderMoney();
@@ -6913,6 +7417,94 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   }
   function stopNumberAnim(el){ el.dataset.animToken = 'stopped-'+Date.now(); }
 
+
+  // ---------- home hero ----------
+  let heroLast=null;
+  function renderHero(a){
+    heroLast=a||heroLast; a=heroLast; if(!a) return;
+    const big=document.getElementById('hhBig'); if(!big) return;
+    const sym=CURRENCY_SYMBOLS[currency]||currency;
+    let crypto=0, c24=0, hasC=false;
+    try{ if(invAssets.length){ const t=ivTotals(); crypto=convertAmount(t.value,'USD',currency); c24=convertAmount(t.d24,'USD',currency); hasC=true; } }catch(e){}
+    const fin=a.total, total=fin+crypto;
+    if(balanceHidden){ stopNumberAnim(big); big.textContent='•••• '+sym; } else animateNumber(big,total);
+    const sg=x=>x>0?'+':x<0?'−':''; const f=x=>Math.abs(x).toLocaleString('ru-RU',{maximumFractionDigits:0})+' '+sym;
+    let d=`<span>Месяц: <b>${sg(a.mNet)}${f(a.mNet)}</b>${a.pctTxt?' ('+a.pctTxt+')':''}</span>`;
+    if(hasC && !balanceHidden) d+=`<span>Крипто 24 ч: <b>${sg(c24)}${f(c24)}</b></span>`;
+    document.getElementById('hhDelta').innerHTML=balanceHidden?'':d;
+    const pf=Math.max(0,fin), pc=Math.max(0,crypto), sum=(pf+pc)||1;
+    document.getElementById('hhSplit').innerHTML=hasC?`<i style="width:${pf/sum*100}%;background:#fff"></i><i style="width:${pc/sum*100}%;background:#ffd27a"></i>`:`<i style="width:100%;background:rgba(255,255,255,.5)"></i>`;
+    document.getElementById('hhLeg').innerHTML=hasC&&!balanceHidden?(pf>0?`<span style="--c:#fff">Деньги ${Math.round(pf/sum*100)}%</span>`:'')+(pc>0?`<span style="--c:#ffd27a">Крипто ${Math.round(pc/sum*100)}%</span>`:''):'';
+    document.getElementById('hhHabitsV').textContent=a.done+'/'+a.due;
+    document.getElementById('hhRingF').setAttribute('stroke-dasharray',(a.due?a.done/a.due*100:0).toFixed(1)+' 100');
+    document.getElementById('hhStreakV').textContent=a.streak;
+    const m=(document.getElementById('wpCount').textContent||'0').match(/\d+/); document.getElementById('hhEventsV').textContent=m?m[0]:'0';
+  }
+  (function(){ const g=id=>document.getElementById(id);
+    g('hhEye').addEventListener('click',e=>{ e.stopPropagation(); balanceHidden=!balanceHidden; renderOverview(); renderDashboard(); });
+    g('hhHabits').addEventListener('click',()=>g('widgetHabits').click()); g('hhStreak').addEventListener('click',()=>g('streakChipBtn').click()); g('hhEvents').addEventListener('click',()=>g('widgetPlanner').click());
+  })();
+
+  // ---------- compact home grid + invest modal ----------
+  function renderHomeGrid(){
+    const g=id=>document.getElementById(id); if(!g('hgBal')) return; const a=heroLast; const sym=CURRENCY_SYMBOLS[currency]||currency;
+    const sgn=x=>x>0?'+':x<0?'−':'';
+    if(a){
+      g('hgBalV').textContent = balanceHidden ? '•••• '+sym : fmtMoney(Math.round(a.total));
+      g('hgBalD').innerHTML = balanceHidden ? '' : `<span class="${a.mNet>=0?'up':'dn'}">${a.pctTxt || (sgn(a.mNet)+Math.abs(Math.round(a.mNet)).toLocaleString('ru-RU')+' '+sym)}</span> <span style="opacity:.7">за месяц</span>`;
+      g('hgHabV').textContent = a.done+'/'+a.due; g('hgHabB').style.width = (a.due?a.done/a.due*100:0)+'%';
+    }
+    try{
+      if(invAssets.length){ const t=ivTotals(); g('hgInvV').textContent = balanceHidden?'••••':ivF(t.value,2)+' $'; g('hgInvS').innerHTML = `<span class="${t.d24>0?'up':t.d24<0?'dn':''}">${ivPct(t.d24Pct)}</span> за 24 ч`; }
+      else { g('hgInvV').textContent='+ Добавить'; g('hgInvS').textContent='крипто-портфель'; }
+    }catch(e){}
+    const dstr=toDateStr(today), ev=plannerEvents.filter(e=>e.date===dstr);
+    g('hgPlanV').textContent = ev.length+' '+(ev.length===1?'событие':(ev.length>=2&&ev.length<=4?'события':'событий'));
+    const nx=(g('wpNext')||{}).textContent||''; g('hgPlanS').textContent = nx.replace('Далее: ','');
+    const act=challenges.filter(c=>challengeStatus(c)==='active');
+    if(act.length){ const best=act.map(c=>({c,p:Object.values(c.log).filter(v=>v).length/c.days})).sort((x,y)=>y.p-x.p)[0];
+      g('hgChalV').textContent=act.length+' '+(act.length===1?'активный':'активных'); g('hgChalB').style.width=(best.p*100)+'%'; }
+    else { g('hgChalV').textContent='Начать'; g('hgChalB').style.width='0%'; }
+  }
+  let ivmTab='port';
+  function ivmRender(){
+    const body=document.getElementById('ivmBody'); if(!body) return;
+    document.querySelectorAll('#ivmSeg button').forEach(b=>b.classList.toggle('on',b.dataset.ivm===ivmTab));
+    let h='';
+    if(ivmTab==='port'){
+      if(!invAssets.length){ h='<div class="ivm-empty">Портфель пуст.<br>Добавь первую монету — цены и график подтянутся сами.<br><br><button class="ivm-open" id="ivmAdd" type="button" style="width:100%;margin:0">+ Добавить монету</button></div>'; }
+      else {
+        const t=ivTotals(); const sg=x=>x>0?'ivm-up':x<0?'ivm-dn':'';
+        h+=`<div class="ivm-big mono">${ivF(t.value,2)}<small>USDT</small></div><div class="ivm-sub"><span>24 ч: <span class="${sg(t.d24)}">${ivSgn(t.d24)} (${ivPct(t.d24Pct)})</span></span><span>Всё время: <span class="${sg(t.all)}">${ivSgn(t.all)} (${ivPct(t.allPct)})</span></span></div>`;
+        h+='<div class="ivm-h">АКТИВЫ</div>';
+        invAssets.map(a=>({a,c:ivCalc(a)})).filter(x=>x.c.qty>0).sort((x,y)=>convertAmount(y.c.value,y.a.cur,'USD')-convertAmount(x.c.value,x.a.cur,'USD')).forEach(({a,c})=>{
+          h+=`<div class="ivm-row" data-ivmasset="${a.id}"><span class="ivm-ico">${ivEsc(a.name.slice(0,3))}</span><div class="ivm-mid"><b>${ivEsc(a.name)}</b><span>${ivF(c.qty,4)} шт. · ${ivP(c.price)}</span></div><div class="ivm-r"><b>${ivF(c.value,2)} ${ivSym(a.cur)}</b><span class="${c.un>=0?'ivm-up':'ivm-dn'}">${ivPct(c.pct)}</span></div></div>`; });
+      }
+    } else {
+      if(!futTrades.length){ h='<div class="ivm-empty">Сделок пока нет.<br>Записывай фьючерсы во вкладке «Инвест» — здесь появится статистика.</div>'; }
+      else {
+        const closed=futTrades.filter(t=>t.exit!=null), open=futTrades.filter(t=>t.exit==null);
+        let tot=0,wins=0,roe=0,best=null,worst=null,lg=0,sh=0; closed.forEach(t=>{ const c=futCalc(t); tot+=c.pnl; roe+=c.roe; if(c.pnl>0) wins++; if(best===null||c.pnl>best) best=c.pnl; if(worst===null||c.pnl<worst) worst=c.pnl; if(t.side==='long') lg++; else sh++; });
+        let unr=0; open.forEach(t=>{ unr+=futCalc(t).pnl; }); const n=closed.length, sg=x=>x>0?'ivm-up':x<0?'ivm-dn':'';
+        h+=`<div class="ivm-big mono ${sg(tot)}">${ivSgn(tot)}<small>USDT · закрытые</small></div><div class="ivm-sub"><span>Win rate: <b style="color:#fff">${n?ivF(wins/n*100,0)+'%':'—'}</b></span><span>Сделок: <b style="color:#fff">${n}</b></span></div>`;
+        h+=`<div class="ivm-grid"><div class="ivm-cell"><span>Ср. ROE</span><b class="${sg(n?roe/n:0)}">${n?ivPct(roe/n):'—'}</b></div><div class="ivm-cell"><span>Открыто</span><b class="${sg(unr)}">${open.length?ivSgn(unr,2)+' USDT':'нет'}</b></div><div class="ivm-cell"><span>Лучшая</span><b class="ivm-up">${best!==null?ivSgn(best,2):'—'}</b></div><div class="ivm-cell"><span>Худшая</span><b class="ivm-dn">${worst!==null?ivSgn(worst,2):'—'}</b></div><div class="ivm-cell"><span>Long</span><b>${lg}</b></div><div class="ivm-cell"><span>Short</span><b>${sh}</b></div></div>`;
+        h+='<div class="ivm-h">ПОСЛЕДНИЕ СДЕЛКИ</div>';
+        futTrades.slice().sort((x,y)=>String(y.cd||y.od||'').localeCompare(String(x.cd||x.od||''))).slice(0,4).forEach(t=>{ const c=futCalc(t);
+          h+=`<div class="ivm-row" style="cursor:default"><span class="ivm-ico" style="color:${t.side==='long'?'#2ee59d':'#ff5468'}">${t.side==='long'?'L':'S'}</span><div class="ivm-mid"><b>${ivEsc(t.sym||'—')}</b><span>${t.lev}x · ${t.exit==null?'открыта':'закрыта'}</span></div><div class="ivm-r"><b class="${sg(c.pnl)}">${ivSgn(c.pnl,2)} USDT</b><span class="${sg(c.pnl)}">${ivPct(c.move)}</span></div></div>`; });
+      }
+    }
+    body.innerHTML=h;
+  }
+  function ivmOpen(){ ivmTab='port'; const m=document.getElementById('ivModal'); m.classList.add('show'); m.setAttribute('aria-hidden','false'); ivmRender(); ivRefresh(false); }
+  function ivmClose(){ const m=document.getElementById('ivModal'); m.classList.remove('show'); m.setAttribute('aria-hidden','true'); }
+  (function(){ const g=id=>document.getElementById(id);
+    g('hgBal').addEventListener('click',()=>goToTab('money')); g('hgHab').addEventListener('click',()=>g('widgetHabits').click()); g('hgPlan').addEventListener('click',()=>g('widgetPlanner').click());
+    g('hgChal').addEventListener('click',()=>{ renderChallengesPanel(); openPanel('challengesPanel'); }); g('hgInv').addEventListener('click',ivmOpen);
+    g('ivmX').addEventListener('click',ivmClose); g('ivmBg').addEventListener('click',ivmClose);
+    g('ivmSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; ivmTab=b.dataset.ivm; ivHap(); ivmRender(); });
+    g('ivmOpen').addEventListener('click',()=>{ ivmClose(); goToTab('invest'); });
+    g('ivmBody').addEventListener('click',e=>{ const r=e.target.closest('[data-ivmasset]'); if(r){ ivmClose(); ivOpenAsset(r.dataset.ivmasset); return; } if(e.target.closest('#ivmAdd')){ ivmClose(); ivAddAsset(); } });
+  })();
   function renderDashboard(){
     const hour = today.getHours();
     document.getElementById('dashGreeting').textContent = hour<6?'Доброй ночи,':hour<12?'Доброе утро,':hour<18?'Добрый день,':'Добрый вечер,';
@@ -6987,6 +7579,7 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       wRunning += net; return wRunning;
     });
     document.getElementById('widgetFinanceChart').innerHTML = smoothChart(wPoints,{w:120,h:34,padX:1,padT:3,padB:2,color:'var(--red-bright)',dots:false,sw:2,ns:true});
+    try{ renderHero({total:totalBalance,mNet,pctTxt,done:doneTodayCount,due:dueToday.length,streak:gStreak}); renderHomeGrid(); }catch(e){ console.error(e); }
 
     document.getElementById('achCount').textContent = `${doneTodayCount} / ${dueToday.length}`;
     const achScroll = document.getElementById('achScroll');
@@ -7419,15 +8012,34 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
   // ================= INVEST (portfolio + futures journal) =================
   let invAssets = [], futTrades = [], ivSub = 'port', ivLive = {}, ivHistC = {}, ivPeriod = 1, ivPTab = 'ov', ivSel = null, ivNetErr = false, ivLastRef = 0, ivSerTok = 0;
   const IV_UP='#2ee59d', IV_DN='#ff5468';
-  async function saveInv(){ try{ await storageSet('invAssets', JSON.stringify(invAssets)); await storageSet('futTrades', JSON.stringify(futTrades)); }catch(e){ console.error(e); } }
+  async function saveInv(){ try{ ivDash(); renderHomeGrid(); if(document.getElementById('ivModal').classList.contains('show')) ivmRender(); await storageSet('invAssets', JSON.stringify(invAssets)); await storageSet('futTrades', JSON.stringify(futTrades)); }catch(e){ console.error(e); } }
   async function invLoad(){
     try{ const a = await storageGet('invAssets'); invAssets = a ? JSON.parse(a) : []; }catch(e){ invAssets = []; }
     try{ const f = await storageGet('futTrades'); futTrades = f ? JSON.parse(f) : []; }catch(e){ futTrades = []; }
     try{ ivLive = JSON.parse(localStorage.getItem('invLive')||'{}')||{}; }catch(e){ ivLive={}; }
     if(!Array.isArray(invAssets)) invAssets=[]; if(!Array.isArray(futTrades)) futTrades=[];
     const v=document.getElementById('invest-view'); if(v && !v.hidden) ivRender();
-    ivRefresh(true);
+    ivDash(); try{ renderHero(); renderHomeGrid(); }catch(e){} ivRefresh(true);
   }
+
+  // ---------- dashboard crypto widget ----------
+  const IV_COL=['#ff5468','#ff9a3d','#f5d142','#2ee59d','#4cc3ff','#9b7bff','#ff7ad9','#8a94a6'];
+  function ivDash(){
+    const w=document.getElementById('widgetInvest'); if(!w) return;
+    const big=document.getElementById('wiBig'), sub=document.getElementById('wiSub'), bar=document.getElementById('wiBar'), leg=document.getElementById('wiLeg');
+    if(!invAssets.length){ big.innerHTML='<span style="font-size:18px;font-weight:700">Добавь первую монету</span>'; sub.textContent='Живые цены, график и прибыль считаются сами'; bar.innerHTML=''; leg.innerHTML=''; return; }
+    const t=ivTotals(); const sg=x=>x>0?'up':x<0?'dn':'';
+    big.innerHTML=ivF(t.value,2)+'<small>USDT</small>';
+    let h='';
+    if(t.d24||Object.keys(ivLive).length) h+=`<span>24 ч: <span class="${sg(t.d24)}">${ivSgn(t.d24)} (${ivPct(t.d24Pct)})</span></span>`;
+    h+=`<span>Всё время: <span class="${sg(t.all)}">${ivSgn(t.all)} (${ivPct(t.allPct)})</span></span>`;
+    sub.innerHTML=h;
+    const parts=t.parts.slice().sort((a,b)=>b.v-a.v), tot=parts.reduce((s,x)=>s+x.v,0)||1;
+    const top=parts.slice(0,5), rest=parts.slice(5).reduce((s,x)=>s+x.v,0); if(rest>0) top.push({n:'Прочее',v:rest});
+    bar.innerHTML=top.map((x,i)=>`<i style="width:${(x.v/tot*100).toFixed(2)}%;background:${IV_COL[i%IV_COL.length]}"></i>`).join('');
+    leg.innerHTML=top.map((x,i)=>`<span style="--c:${IV_COL[i%IV_COL.length]}">${ivEsc(x.n)} <b>${ivF(x.v/tot*100,0)}%</b></span>`).join('');
+  }
+  document.getElementById('widgetInvest').addEventListener('click',()=>goToTab('invest'));
   const ivPad = n => String(n).padStart(2,"0");
   const ivEsc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const ivNum = v => { const n = parseFloat(String(v==null?'':v).replace(/\s/g,'').replace(',','.')); return isFinite(n)?n:NaN; };
@@ -7507,14 +8119,14 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
       if(!okC){ await Promise.all(as.filter(a=>a.sym).map(async a=>{ try{ const q=await ivQuote('binance','spot',String(a.sym).toUpperCase()+'USDT'); if(q.p>0){ ivLive[a.cg]={p:q.p,ch:q.ch,ts:Date.now()}; okC=true; } }catch(_){ try{ const q=await ivQuote('bybit','spot',String(a.sym).toUpperCase()+'USDT'); if(q.p>0){ ivLive[a.cg]={p:q.p,ch:q.ch,ts:Date.now()}; okC=true; } }catch(__){} } })); }
       ok=ok||okC; }
     ivNetErr=!ok; if(ok){ try{ localStorage.setItem('invLive',JSON.stringify(ivLive)); }catch(e){} }
-    ivRepaint();
+    ivDash(); try{ renderHero(); renderHomeGrid(); if(document.getElementById('ivModal').classList.contains('show')) ivmRender(); }catch(e){} ivRepaint();
   }
   function ivRepaint(){
     if(document.getElementById('invest-view').hidden) return;
     if(ivSub==='port') ivRenderPort(); else ivRenderFut();
     if(document.getElementById('ivAssetPanel').classList.contains('show')) ivRenderAsset();
   }
-  setInterval(()=>{ try{ if(!document.hidden && !document.getElementById('invest-view').hidden) ivRefresh(true); }catch(e){} },60000);
+  setInterval(()=>{ try{ if(!document.hidden && (!document.getElementById('invest-view').hidden || !document.getElementById('dash-view').hidden)) ivRefresh(true); }catch(e){} },60000);
   async function ivHist(cg,days){
     if(cg.indexOf(':')>0){ const k=cg+'|'+days, c=ivHistC[k]; if(c && Date.now()-c.t<300000) return c.v;
       const ex=cg.indexOf('bb:')===0?'bybit':'binance', sym=cg.slice(3).toUpperCase()+'USDT', tf=days<=1?'5m':days<=7?'1h':days<=30?'4h':'1d', now=Date.now();
@@ -7758,17 +8370,35 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
             if(r&&r.usd!=null){ ivLive[ivSel.cg]={p:r.usd,ch:r.usd_24h_change||0,ts:Date.now()}; const pe=document.getElementById('ivf_p'); if(pe && !pe.value) pe.value=String(r.usd); box.innerHTML=`<div class="iv-sub" style="padding:2px 4px 10px;color:var(--ink)">Выбрано: <b>${ivEsc(b.dataset.nm)}</b> · сейчас ${ivP(r.usd)} USDT</div>`; ivFormPrev(); } }catch(err){ box.innerHTML=`<div class="iv-sub" style="padding:2px 4px 10px;color:var(--ink)">Выбрано: <b>${ivEsc(b.dataset.nm)}</b> — цену введи вручную</div>`; } });
       }});
   }
+  function ivReadPQA(v,fp){ let p=ivNum(v.p); if(!(p>0)) p=fp||0; let a=ivNum(v.a); const q=ivNum(v.q); if(!(a>0) && q>0 && p>0) a=q*p; return {p,a}; }
+  function ivQtyWire(fp,maxQ,maxLbl){
+    const g=id=>document.getElementById('ivf_'+id); const p=g('p'),q=g('q'),a=g('a'); if(!p||!q||!a) return; let last='a';
+    const pr=()=>ivNum(p.value)||fp()||0, num=x=>String(+x.toPrecision(10));
+    q.addEventListener('input',()=>{ last='q'; const pv=pr(),qv=ivNum(q.value); a.value=pv>0&&qv>0?num(qv*pv):''; });
+    a.addEventListener('input',()=>{ last='a'; const pv=pr(),av=ivNum(a.value); q.value=pv>0&&av>0?num(av/pv):''; });
+    p.addEventListener('input',()=>{ const pv=pr(); if(!(pv>0)) return; if(last==='q'){ const qv=ivNum(q.value); a.value=qv>0?num(qv*pv):''; } else { const av=ivNum(a.value); q.value=av>0?num(av/pv):''; } });
+    const sv=document.getElementById('ivfSave');
+    if(maxQ && sv){ const bt=document.createElement('button'); bt.type='button'; bt.className='btn ghost'; bt.id='ivMax'; bt.style.cssText='width:100%;margin:0 0 8px'; bt.textContent=maxLbl||'Продать всё';
+      bt.addEventListener('click',()=>{ const m=maxQ(); if(!(m>0)) return; ivHap(); q.value=num(m); last='q'; const pv=pr(); a.value=pv>0?num(m*pv):''; ivFormPrev(); });
+      sv.parentNode.insertBefore(bt,sv); }
+  }
   function ivTxAny(){
     if(!invAssets.length) return ivAddAsset();
+    const cur=()=>{ const el=document.getElementById('ivf_as'); return invAssets.find(x=>x.name===(el?el.value:invAssets[0].name))||invAssets[0]; };
+    const isSell=()=>{ const b=document.querySelector('#ivFormBody [data-seg="t"] .on'); return !!b && b.dataset.v==='sell'; };
     ivOpenForm('Новая транзакция',[
       {k:'t',type:'seg',val:'buy',opts:[['buy','Покупка','long'],['sell','Продажа','short']]},
       {k:'as',label:'Актив',type:'select',opts:invAssets.map(a=>a.name),val:invAssets[0].name},
-      {k:'p',label:'Цена',type:'num',ph:'0.00',half:true},{k:'a',label:'Сумма',type:'num',ph:'100',half:true},
-      {k:'d',label:'Дата',type:'date',val:ivTodayStr()}
-    ],v=>{ const a=invAssets.find(x=>x.name===v.as); if(!a) return 'Выбери актив'; const c=ivCalc(a); let p=ivNum(v.p); if(!(p>0)) p=c.price; const amt=ivNum(v.a);
-      if(!(p>0)) return 'Укажи цену'; if(!(amt>0)) return 'Укажи сумму';
-      if(v.t==='sell' && amt/p>c.qty*1.0001) return 'Нельзя продать больше, чем есть';
-      a.txs.push({id:uid(),d:v.d||ivTodayStr(),t:v.t,p,a:amt,ts:Date.now()}); saveInv(); ivRepaint(); });
+      {k:'p',label:'Цена',type:'num',ph:String(ivCalc(invAssets[0]).price||'0.00'),half:true},{k:'q',label:'Кол-во монет',type:'num',ph:'0',half:true},
+      {k:'a',label:'Сумма',type:'num',ph:'100',half:true},{k:'d',label:'Дата',type:'date',val:ivTodayStr(),half:true}
+    ],v=>{ const a=invAssets.find(x=>x.name===v.as); if(!a) return 'Выбери актив'; const c=ivCalc(a); const r=ivReadPQA(v,c.price); const p=r.p, amt=r.a;
+      if(!(p>0)) return 'Укажи цену'; if(!(amt>0)) return 'Укажи сумму или количество';
+      if(v.t==='sell' && amt/p>c.qty*1.0001) return 'Нельзя продать больше, чем есть ('+ivF(c.qty,6)+' шт.)';
+      a.txs.push({id:uid(),d:v.d||ivTodayStr(),t:v.t,p,a:amt,ts:Date.now()}); saveInv(); ivRepaint(); },
+    {preview:v=>{ const a=invAssets.find(x=>x.name===v.as); const r=ivReadPQA(v,a?ivCalc(a).price:0); return r.p>0&&r.a>0?`${v.t==='sell'?'Продам':'Куплю'} <b>${ivF(r.a/r.p,6)}</b> шт. на <b>${ivF(r.a,2)}</b> ${a?ivSym(a.cur):''}`:'Цена и сумма или количество'; },
+     after:()=>{ ivQtyWire(()=>ivCalc(cur()).price,()=>isSell()?ivCalc(cur()).qty:0,'Продать всё'); const mx=document.getElementById('ivMax'); const sync=()=>{ if(mx) mx.style.display=isSell()?'':'none'; }; sync();
+       document.getElementById('ivFormBody').addEventListener('click',e=>{ if(e.target.closest('.iv-segf button')) setTimeout(sync,0); });
+       const se=document.getElementById('ivf_as'); if(se) se.addEventListener('change',()=>{ const pe=document.getElementById('ivf_p'); if(pe) pe.placeholder=String(ivCalc(cur()).price||'0.00'); }); }});
   }
   function ivOpenAsset(id){
     const a=invAssets.find(x=>x.id===id); if(!a) return;
@@ -7812,14 +8442,16 @@ body:not(.theme-classic) .grid-heat .cell.l4.h2{background:linear-gradient(135de
     const c=ivCalc(a);
     ivOpenForm(type==='buy'?'Покупка':'Продажа',[
       {k:'p',label:'Цена',type:'num',ph:c.price?String(c.price):'0',val:c.price?String(c.price):'',half:true},
+      {k:'q',label:'Кол-во монет',type:'num',ph:'0',half:true},
       {k:'a',label:'Сумма, '+ivSym(a.cur),type:'num',ph:'100',half:true},
-      {k:'d',label:'Дата',type:'date',val:ivTodayStr()}
+      {k:'d',label:'Дата',type:'date',val:ivTodayStr(),half:true}
     ],v=>{
-      const p=ivNum(v.p), amt=ivNum(v.a);
-      if(!(p>0)) return 'Укажи цену'; if(!(amt>0)) return 'Укажи сумму';
-      if(type==='sell' && amt/p>c.qty*1.0001) return 'Нельзя продать больше, чем есть ('+ivF(c.qty*p,2)+' '+ivSym(a.cur)+' по этой цене)';
+      const r=ivReadPQA(v,0), p=r.p, amt=r.a;
+      if(!(p>0)) return 'Укажи цену'; if(!(amt>0)) return 'Укажи сумму или количество';
+      if(type==='sell' && amt/p>c.qty*1.0001) return 'Нельзя продать больше, чем есть ('+ivF(c.qty,6)+' шт.)';
       a.txs.push({id:uid(),d:v.d||ivTodayStr(),t:type,p,a:amt,ts:Date.now()}); saveInv(); ivRenderAsset(); ivRenderPort();
-    },{preview:v=>{ const p=ivNum(v.p),amt=ivNum(v.a); return p>0&&amt>0?`${type==='buy'?'Куплю':'Продам'} ≈ <b>${ivF(amt/p,4)}</b> шт.`:'Цена и сумма → количество'; }});
+    },{preview:v=>{ const r=ivReadPQA(v,0); return r.p>0&&r.a>0?`${type==='buy'?'Куплю':'Продам'} <b>${ivF(r.a/r.p,6)}</b> шт. на <b>${ivF(r.a,2)}</b> ${ivSym(a.cur)}`+(type==='sell'?` · есть ${ivF(c.qty,6)} шт.`:''):'Цена и сумма или количество'; },
+     after:()=>ivQtyWire(()=>0,type==='sell'?()=>c.qty:null,'Продать всё ('+ivF(c.qty,6)+' шт.)')});
   }
   function ivQuoteForm(){
     const a=invAssets.find(x=>x.id===ivCurAsset); if(!a) return;
